@@ -5,6 +5,8 @@ export default {
   title: 'Rangovams – sklypo lyginimo užklausos jūsų regione | sklypolyginimas.lt',
   description: 'Žemės darbų įmonėms: gaukite sklypo lyginimo užklausas iš savo regiono be reklamos biudžeto. Mokestis už užklausą, regiono išimtinė teisė arba svetainės perėmimas.',
   headOpts: { partner: true },
+  noindex: true,
+  noSitemap: true,
   body: `
 <section style="padding:40px 0 var(--sec)" data-mg data-stagger="90">
 <div class="wrap split center" style="gap:48px 72px">

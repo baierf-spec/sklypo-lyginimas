@@ -51,7 +51,7 @@ const turnstile = () => SITE.turnstileSiteKey ? `<div class="cf-turnstile" data-
 
 const munOptions = (placeholder = true) => (placeholder ? '<option value="">Pasirinkite</option>' : '') + MUNICIPALITIES.map((m) => `<option>${m}</option>`).join('');
 
-export const consent = () => `<label class="check"><input type="checkbox" name="sutikimas" value="taip" required>Sutinku, kad užklausa būtų perduota rangovui, dirbančiam mano regione. <a href="/privatumo-politika/">Privatumo politika</a></label>`;
+export const consent = () => `<label class="check"><input type="checkbox" name="sutikimas" value="taip" required>Sutinku, kad mano duomenys būtų naudojami šiai užklausai pagal <a href="/privatumo-politika/">privatumo politiką</a>.</label>`;
 
 /** Short lead form (4 fields + photos). */
 export const shortForm = ({ source, dark = false, municipality, villages } = {}) => {
@@ -81,7 +81,7 @@ ${turnstile()}
 <div class="done" role="status" tabindex="-1">
 ${doneIcon}
 <h3 class="h2" style="font-size:32px">Užklausa išsiųsta</h3>
-<p style="font-size:17px;line-height:1.6" class="${dark ? '' : 'muted'}">Rangovas susisieks su jumis tą pačią arba kitą darbo dieną ir suderins apmatavimo laiką.</p>
+<p style="font-size:17px;line-height:1.6" class="${dark ? '' : 'muted'}">Paskambinsime tą pačią arba kitą darbo dieną ir suderinsime nemokamo apmatavimo laiką.</p>
 </div>
 </div>`;
 };
@@ -89,7 +89,7 @@ ${doneIcon}
 export { munOptions, doneIcon, turnstile };
 
 const NAV = [
-  { href: '/paslaugos/', label: 'Darbai' },
+  { href: '/paslaugos/', label: 'Paslaugos' },
   { href: '/kaina/', label: 'Kainos' },
   { href: '/#miestai', label: 'Miestai' },
   { href: '/#duk', label: 'Klausimai' },
@@ -110,17 +110,17 @@ export const footer = () => `
 <div class="foot-grid">
 <div class="stack" style="gap:14px">
 <a href="/" class="brand" aria-label="sklypolyginimas.lt">${logoMark(32)}<span class="brand-name">sklypolyginimas<span>.lt</span></span></a>
-<p class="small" style="font-size:15px;max-width:22em">Sklypo lyginimo informacija ir užklausos. Darbus atlieka nepriklausomi partneriai rangovai. Svetainę administruoja [valdytojas].</p>
+<p class="small" style="font-size:15px;max-width:22em">Sklypų lyginimas, nuolydžiai ir paruošimas vejai visoje Lietuvoje. [Įmonės pavadinimas], įm. k. [kodas].</p>
 </div>
-<nav aria-label="Puslapiai"><a href="/paslaugos/">Sklypo lyginimo darbai</a><a href="/kaina/">Kainos ir skaičiuoklė</a><a href="/uzklausa/">Užklausa</a><a href="/privatumo-politika/">Privatumo politika</a></nav>
+<nav aria-label="Puslapiai"><a href="/paslaugos/">Sklypo lyginimo paslaugos</a><a href="/kaina/">Kainos ir skaičiuoklė</a><a href="/uzklausa/">Užklausa</a><a href="/privatumo-politika/">Privatumo politika</a></nav>
 <nav aria-label="Miestai"><a href="/vilnius/">Sklypo lyginimas Vilniuje</a><a href="/kaunas/">Sklypo lyginimas Kaune</a></nav>
-<nav aria-label="Rangovams"><span class="ttl">Žemės darbų įmonėms</span><a href="/rangovams/">Gaukite užklausų savo regione</a></nav>
+<div class="stack" style="gap:12px;font-size:16px"><span class="ttl" style="font-weight:600">Užklausos</span><a href="/uzklausa/">Gauti pasiūlymą</a><span class="muted" style="font-size:15px">Apmatavimas nemokamas</span></div>
 </div>
 <p class="small">© 2026 sklypolyginimas.lt</p>
 </div></footer>`;
 
 /** Full HTML document. */
-export const layout = ({ path, title, description, body, schema = [], current, headOpts = {}, ogType = 'website' }) => {
+export const layout = ({ path, title, description, body, schema = [], current, headOpts = {}, ogType = 'website', noindex = false }) => {
   const canonical = SITE.url + path;
   const graph = {
     '@context': 'https://schema.org',
@@ -137,6 +137,7 @@ export const layout = ({ path, title, description, body, schema = [], current, h
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+${noindex ? '<meta name="robots" content="noindex, nofollow">' : ''}
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:locale" content="lt_LT">

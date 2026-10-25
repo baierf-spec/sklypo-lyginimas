@@ -1,33 +1,33 @@
 import { SITE, faq, faqSchema, shortForm, checkIcon } from '../site.mjs';
 
 const FAQ = [
-  { q: 'Kiek kainuoja išlyginti 10 arų sklypą?', a: 'Technika su operatoriumi kainuoja 30–45 € už valandą. Galutinė suma priklauso nuo to, kiek valandų užtruks darbas: lygiam sklypui jų reikia mažiau, kauburiuotam ar po statybų – daugiau. Orientacinę sumą parodys <a href="/kaina/">skaičiuoklė</a>.' },
-  { q: 'Kada geriausia lyginti sklypą?', a: 'Nuo pavasario, kai žemė pradžiūsta, iki vėlyvo rudens. Molingo grunto po liūčių geriau neliesti: technika jį suspaudžia, ir vanduo nebesigeria.' },
-  { q: 'Kiek juodžemio reikia vejai?', a: 'Rekomenduojama 15–18 cm derlingo sluoksnio. Vienam arui tai 15–18 m³, dešimčiai arų – 150–180 m³. Jei sklype jau yra geros žemės, atvežti reikės mažiau.' },
-  { q: 'Kokia technika tinkamiausia sklypui lyginti?', a: 'Kiemams tarp tvorų – mini krautuvas, dideliems plotams ir aukščių skirtumams – buldozeris. Nuolydžiai tikslinami lazeriniu nivelyru, paviršius sutankinamas volu.' },
-  { q: 'Kas atliks darbus?', a: 'Jūsų užklausą perduodame vienam patikrintam rangovui jūsų regione. Sutartį sudarote tiesiogiai su juo, o už užklausą nieko nemokate.' },
+  { q: 'Kiek kainuoja išlyginti 10 arų sklypą?', a: 'Dirbame 30–45 € už technikos valandą su operatoriumi. Kiek valandų prireiks, priklauso nuo reljefo ir grunto: lygiam sklypui – mažiau, kauburiuotam ar po statybų – daugiau. Tikslią kainą pasakome po nemokamo apmatavimo, o orientacinę galite paskaičiuoti <a href="/kaina/">skaičiuoklėje</a>.' },
+  { q: 'Kada geriausia lyginti sklypą?', a: 'Dirbame nuo pavasario, kai žemė pradžiūsta, iki vėlyvo rudens. Molingo grunto po liūčių neliečiame – technika jį suspaustų, ir vanduo nebesigertų. Tokiu atveju palaukiame sausesnių dienų.' },
+  { q: 'Kiek juodžemio reikia vejai?', a: 'Vejai reikia 15–18 cm derlingo sluoksnio: vienam arui – 15–18 m³, dešimčiai arų – 150–180 m³. Apmatuodami įvertiname, kiek geros žemės sklype jau yra, ir pasakome, kiek reikia atvežti.' },
+  { q: 'Kokia technika dirbate?', a: 'Kiemams tarp tvorų naudojame mini krautuvą, dideliems plotams ir aukščių skirtumams – buldozerį. Nuolydžius tikriname lazeriniu nivelyru, paviršių sutankiname volu.' },
+  { q: 'Ar atvažiuojate apžiūrėti sklypo?', a: 'Taip. Apmatavimas nemokamas ir nieko neįpareigoja: išmatuojame aukščius, įvertiname gruntą ir privažiavimą, o kainą atsiunčiame raštu.' },
 ];
 
 const REQ = [
-  ['„Kaina sutartinė“, o sąskaita už valandas išauga dvigubai.', 'Sąmata raštu, su kaina už arą arba didžiausiu valandų skaičiumi.'],
-  ['Pažadama atvažiuoti „kitą savaitę“, o paskui nebeatsiliepiama.', 'Konkreti darbų data, užrašyta sutartyje ar bent el. laiške.'],
-  ['Po pirmo lietaus atsiranda balos, vanduo bėga link pamatų.', 'Nuolydis nuo namo, išmatuotas nivelyru, o ne „iš akies“.'],
-  ['Atvežtame juodžemyje – molis, akmenys ir piktžolių šaknys.', 'Žemės kilmė iš anksto ir galimybė ją apžiūrėti prieš paskleidžiant.'],
-  ['Molingas gruntas lyginamas po liūties ir suspaudžiamas.', 'Darbai tik po vienos–dviejų sausų dienų, net jei tenka nukelti datą.'],
-  ['Išvažinėta veja, įskilusios trinkelės, užkabinta tvora.', 'Technika, parinkta pagal privažiavimą, ir sutvarkyta vieta po darbų.'],
+  ['„Kaina sutartinė“, o sąskaita už valandas išauga dvigubai.', 'Kainą pateikiame raštu prieš darbus – su aiškia darbų apimtimi.'],
+  ['Pažadama atvažiuoti „kitą savaitę“, o paskui nebeatsiliepiama.', 'Darbų datą suderiname iš anksto ir jos laikomės.'],
+  ['Po pirmo lietaus atsiranda balos, vanduo bėga link pamatų.', 'Nuolydį nuo namo išmatuojame nivelyru, o ne „iš akies“.'],
+  ['Atvežtame juodžemyje – molis, akmenys ir piktžolių šaknys.', 'Pasakome, iš kur atvežame žemę, ir parodome ją prieš paskleidžiant.'],
+  ['Molingas gruntas lyginamas po liūties ir suspaudžiamas.', 'Molingo grunto po liūties neliečiame – palaukiame sausų dienų.'],
+  ['Išvažinėta veja, įskilusios trinkelės, užkabinta tvora.', 'Techniką parenkame pagal privažiavimą ir po darbų viską sutvarkome.'],
 ];
 
 // Thumbnails: each carries hooks for its story (see app.js → stories)
 const SVC = [
-  ['s1', 'Grubus lyginimas ir planiravimas', 'Kauburiai nukasami, duobės užpildomos, aukščiai susiejami su namu ir keliu.', 'regrade',
+  ['s1', 'Grubus lyginimas ir planiravimas', 'Nukasame kauburius, užpildome duobes, aukščius susiejame su namu ir keliu.', 'regrade',
     '<path d="M8 40 C 26 20, 40 52, 60 34 S 92 22, 112 38" fill="none" stroke="#8A6A4E" stroke-width="2" stroke-dasharray="4 4"/><path data-draw d="M8 44 L112 48" stroke="#2E5B3A" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0"/>'],
-  ['s2', 'Paruošimas vejai', 'Frezavimas, akmenų išrinkimas, lyginimas ir volavimas prieš sėją.', 'roll',
+  ['s2', 'Paruošimas vejai', 'Išfrezuojame, išrenkame akmenis, išlyginame ir privoluojame prieš sėją.', 'roll',
     '<rect x="8" y="34" width="104" height="6" rx="3" fill="#4F8A4C"/><rect x="8" y="40" width="104" height="12" fill="#5B4130"/><g data-roller><circle cx="88" cy="24" r="9" fill="none" stroke="#16291C" stroke-width="2"/><path data-spoke d="M88 17 V31 M81 24 H95" stroke="#16291C" stroke-width="1.5"/></g>'],
-  ['s3', 'Nuolydžiai ir vandens nuvedimas', 'Vanduo nukreipiamas nuo pamatų į drenažą ar griovį.', 'flow',
+  ['s3', 'Nuolydžiai ir vandens nuvedimas', 'Nukreipiame vandenį nuo pamatų į drenažą ar griovį.', 'flow',
     '<rect x="10" y="16" width="26" height="30" rx="2" fill="#16291C"/><path d="M36 44 L112 52" stroke="#2E5B3A" stroke-width="3" stroke-linecap="round"/><path data-dash d="M54 34 h36" stroke="#4E86B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="6 4"/><path d="M84 29 l7 5 -7 5" stroke="#4E86B0" stroke-width="2" fill="none" stroke-linecap="round"/><circle data-drop cx="40" cy="43" r="2.6" fill="#4E86B0" opacity="0"/>'],
-  ['s5', 'Juodžemio atvežimas', 'Vejai reikia 15–18 cm derlingo sluoksnio – apie 15–18 m³ arui.', 'spread',
+  ['s5', 'Juodžemio atvežimas', 'Atvežame ir paskleidžiame 15–18 cm derlingo sluoksnio – apie 15–18 m³ arui.', 'spread',
     '<path class="sx" data-pile d="M16 50 L36 20 L56 50 Z" fill="#5B4130" style="transform-origin:center bottom"/><rect class="sx" data-layer x="56" y="44" width="56" height="6" rx="3" fill="#5B4130" style="transform-origin:left center"/><rect x="56" y="40" width="56" height="4" rx="2" fill="#4F8A4C"/>'],
-  ['s6', 'Sklypo paruošimas statyboms', 'Krūmai, kelmai, statybinės atliekos ir privažiavimas technikai.', 'stump',
+  ['s6', 'Sklypo paruošimas statyboms', 'Pašaliname krūmus, kelmus, statybines atliekas ir įrengiame privažiavimą.', 'stump',
     '<path class="sx" data-stump d="M26 52 V30 M26 30 l-8 -8 M26 30 l8 -11" stroke="#8A6A4E" stroke-width="2.2" fill="none" stroke-linecap="round"/><rect x="58" y="30" width="20" height="22" rx="2" fill="none" stroke="#5C6B60" stroke-width="2"/><path d="M8 52 h104" stroke="#2E5B3A" stroke-width="3" stroke-linecap="round"/>'],
 ];
 
@@ -103,15 +103,15 @@ const price = (label, a, b, unit) => `<div data-m="up"><dt>${label}</dt><dd><spa
 
 export default {
   path: '/',
-  title: 'Sklypo lyginimas – kaina 2026 ir patikrinti rangovai | sklypolyginimas.lt',
-  description: 'Sklypo lyginimas visoje Lietuvoje: rinkos kainos 2026 m. (30–45 €/val.), kainų skaičiuoklė ir nemokama užklausa patikrintam rangovui jūsų rajone.',
+  title: 'Sklypo lyginimas – nuo 30 €/val., nemokamas apmatavimas | sklypolyginimas.lt',
+  description: 'Lyginame sklypus, formuojame nuolydžius ir paruošiame vejai visoje Lietuvoje. 30–45 €/val., nemokamas apmatavimas, kaina raštu prieš darbus.',
   body: `
 <section data-mg data-stagger="90">
 <div class="wrap stack" style="gap:40px;padding-top:40px">
 <div class="split end" style="gap:32px 64px">
 <h1 class="disp h1-xl" data-m="up">Sklypo lyginimas, po kurio nelieka balų</h1>
 <div class="stack" style="gap:28px;padding-bottom:8px">
-<p class="lead" data-m="up">Aprašykite sklypą per dvi minutes. Patikrintas jūsų rajono rangovas atvažiuos jo išmatuoti ir pateiks kainą raštu – dar prieš pradedant darbus.</p>
+<p class="lead" data-m="up">Išlyginame sklypus, suformuojame nuolydžius nuo namo ir paruošiame vejai. Atvažiuojame, išmatuojame nivelyru ir pateikiame kainą raštu – dar prieš pradedant darbus.</p>
 <div class="row" data-m="up"><a href="/uzklausa/" class="btn">Gauti pasiūlymą</a><a href="/kaina/" class="btn-o">Kiek tai kainuoja?</a></div>
 </div>
 </div>
@@ -120,8 +120,8 @@ export default {
 <span class="slider-hint" aria-hidden="true">Tempkite, kad pamatytumėte skirtumą</span>
 </figure>
 <ul class="ticks">
-<li data-m="up">${checkIcon(18)}Užklausa nemokama ir nieko neįpareigoja</li>
-<li data-m="up">${checkIcon(18)}Perduodame tik patikrintiems rangovams</li>
+<li data-m="up">${checkIcon(18)}Nemokamas apmatavimas</li>
+<li data-m="up">${checkIcon(18)}Nuolydžiai matuojami nivelyru</li>
 <li data-m="up">${checkIcon(18)}Kaina raštu prieš darbus</li>
 </ul>
 </div>
@@ -130,9 +130,9 @@ export default {
 <section class="sec" data-mg>
 <div class="wrap split" style="gap:48px 80px">
 <div class="stack" style="gap:24px;max-width:34em">
-<h2 class="h2 h2-l" data-m="up">Kiek kainuoja sklypo lyginimas 2026 metais</h2>
-<p style="font-size:19px;line-height:1.6;color:var(--ink-2)" data-m="up">Dauguma rangovų skaičiuoja už technikos valandą: įprastai 30–45 €, vidutiniškai 37 €. Didelius plotus lyginant buldozeriu valanda kainuoja brangiau, bet darbas vyksta greičiau. Prie sumos pridedamas technikos atvežimas ir juodžemis, jei jo trūksta.</p>
-<p class="muted" data-m="up">Tikslią kainą lemia reljefas, gruntas ir privažiavimas, todėl patikimiausia – apmatavimas vietoje ir sąmata raštu.</p>
+<h2 class="h2 h2-l" data-m="up">Kiek kainuoja sklypo lyginimas</h2>
+<p style="font-size:19px;line-height:1.6;color:var(--ink-2)" data-m="up">Dirbame už technikos valandą su operatoriumi: mini krautuvu – 30–45 €, buldozeriu – 50–70 €. Buldozeris brangesnis, bet didelius plotus išlygina gerokai greičiau. Prie sumos pridedamas technikos atvežimas ir juodžemis, jei jo trūksta.</p>
+<p class="muted" data-m="up">Tikslią kainą pasakome po nemokamo apmatavimo ir pateikiame raštu – su kiekvienu darbu atskira eilute.</p>
 <a href="/kaina/" style="font-weight:600" data-m="up">Atidaryti kainų skaičiuoklę</a>
 </div>
 <div class="panel" style="padding-block:12px 24px" data-m="card" data-story="rows">
@@ -142,7 +142,7 @@ ${price('Buldozeris', 50, 70, 'val.')}
 ${price('Mini ekskavatorius', 25, 35, 'val.')}
 ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 </dl>
-<p class="small" style="margin-top:8px" data-m="up">Teikėjų skelbiamos kainos Vilniuje ir Kaune, paslaugos.lt, 2026 m. spalis.</p>
+<p class="small" style="margin-top:8px" data-m="up">Orientaciniai įkainiai 2026 m. Galutinė kaina – po apmatavimo.</p>
 </div>
 </div>
 </section>
@@ -150,8 +150,8 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <section class="sec" data-mg>
 <div class="wrap stack" style="gap:56px">
 <div class="split end" style="gap:24px 80px">
-<h2 class="h2 h2-l" data-m="up">Ko reikalauti iš rangovo, kad nereikėtų perdarinėti</h2>
-<p class="body-l" data-m="up">Šešios situacijos, dėl kurių žmonės dažniausiai lieka nepatenkinti. Kiekvienos galima išvengti vienu aiškiu susitarimu. Mūsų partneriai šių susitarimų laikosi.</p>
+<h2 class="h2 h2-l" data-m="up">Kaip dirbame, kad nereikėtų perdarinėti</h2>
+<p class="body-l" data-m="up">Šios situacijos dažniausiai nutinka, kai sklypas lyginamas paskubomis. Kiekvienai iš jų turime aiškią taisyklę.</p>
 </div>
 <div class="req">${REQ.map(([w, n]) => `<div data-m="up"><p class="was">${w}</p><p class="need">${n}</p></div>`).join('')}</div>
 </div>
@@ -159,11 +159,11 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 
 <section class="dark" style="margin-top:var(--sec);padding-block:var(--sec)" data-mg data-stagger="110">
 <div class="wrap stack" style="gap:64px">
-<h2 class="h2 h2-l" style="max-width:14em" data-m="up">Nuo užklausos iki kainos raštu – trys žingsniai</h2>
+<h2 class="h2 h2-l" style="max-width:14em" data-m="up">Nuo užklausos iki lygaus sklypo – trys žingsniai</h2>
 <ol class="steps">
 <li data-m="up"><span class="disp tnum n">1</span><h3>Aprašote sklypą</h3><p>Vieta, plotas, ko reikia ir, jei norite, kelios nuotraukos. Užtrunka dvi minutes.</p></li>
-<li data-m="up"><span class="disp tnum n">2</span><h3>Rangovas susisiekia</h3><p>Užklausą gauna vienas patikrintas jūsų rajono rangovas ir tą pačią arba kitą darbo dieną suderina apmatavimą.</p></li>
-<li data-m="up"><span class="disp tnum n">3</span><h3>Gaunate sąmatą</h3><p>Rangovas išmatuoja aukščius ir atsiunčia kainą raštu. Ar užsakyti darbus, sprendžiate jūs.</p></li>
+<li data-m="up"><span class="disp tnum n">2</span><h3>Atvažiuojame apmatuoti</h3><p>Paskambiname tą pačią arba kitą darbo dieną ir suderiname laiką. Apmatavimas nemokamas.</p></li>
+<li data-m="up"><span class="disp tnum n">3</span><h3>Išlyginame sklypą</h3><p>Atsiunčiame kainą raštu. Jums sutikus, sutartą dieną atliekame darbus ir kartu patikriname nuolydžius.</p></li>
 </ol>
 <div data-m="up"><a href="/uzklausa/" class="btn-l">Pradėti užklausą</a></div>
 </div>
@@ -172,9 +172,9 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <section class="sec" data-mg>
 <div class="wrap split" style="gap:40px 80px">
 <div class="stack" style="max-width:26em">
-<h2 class="h2 h2-l" data-m="up">Ką apima sklypo lyginimas</h2>
-<p class="body-l" data-m="up">Dažniausiai reikia ne vieno darbo, o kelių iš eilės. Užklausoje pažymėkite visus – rangovas pateiks bendrą sąmatą.</p>
-<a href="/paslaugos/" style="font-weight:600" data-m="up">Visi darbai su brėžiniais</a>
+<h2 class="h2 h2-l" data-m="up">Ką atliekame</h2>
+<p class="body-l" data-m="up">Dažniausiai reikia kelių darbų iš eilės – atliekame juos visus vienu kartu, pagal vieną sąmatą.</p>
+<a href="/paslaugos/" style="font-weight:600" data-m="up">Visos paslaugos su brėžiniais</a>
 </div>
 <div>${SVC.map(([id, t, d, story, s]) => `<a href="/paslaugos/#${id}" class="svc" data-m="left"><svg viewBox="0 0 120 64" aria-hidden="true" data-story="${story}">${s}</svg><div><h3>${t}</h3><p>${d}</p></div></a>`).join('')}</div>
 </div>
@@ -184,8 +184,8 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <div class="wrap">
 <div class="panel split center" style="gap:48px 64px" data-m="card">
 <div class="stack" style="gap:22px">
-<h2 class="h2 h2-m" data-m="up">Taip atrodo teisingai paruoštas sklypas</h2>
-<p class="body-l" data-m="up">Balos, išdžiūvę lopai ir nusėdę takai atsiranda ne dėl žolės, o dėl pagrindo. Keturi dalykai, kuriuos turi padaryti geras rangovas:</p>
+<h2 class="h2 h2-m" data-m="up">Taip paruošiame kiekvieną sklypą</h2>
+<p class="body-l" data-m="up">Balos, išdžiūvę lopai ir nusėdę takai atsiranda ne dėl žolės, o dėl blogai paruošto pagrindo. Todėl kiekviename sklype darome keturis dalykus:</p>
 <dl class="abcd" data-abcd>
 <div data-m="up" data-k="A"><dt>A</dt><dd><strong>Nuolydis 2–5 % nuo pamatų</strong> pirmuosius tris metrus.</dd></div>
 <div data-m="up" data-k="B"><dt>B</dt><dd><strong>Sutankintas gruntas</strong> po takais ir terasa.</dd></div>
@@ -201,8 +201,8 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <section id="miestai" class="sec" data-mg data-stagger="50">
 <div class="wrap split" style="gap:32px 80px">
 <div class="stack" style="gap:16px;max-width:26em">
-<h2 class="h2 h2-m" data-m="up">Sklypo lyginimas jūsų mieste</h2>
-<p class="body-l" data-m="up">Užklausas priimame visoje Lietuvoje. Didžiųjų miestų puslapiuose rasite vietinius įkainius ir aptarnaujamas vietoves.</p>
+<h2 class="h2 h2-m" data-m="up">Dirbame visoje Lietuvoje</h2>
+<p class="body-l" data-m="up">Daugiausia dirbame Vilniaus ir Kauno regionuose, bet atvažiuojame ir į kitus miestus. Į tolimesnes vietas gali būti didesnis technikos atvežimo mokestis.</p>
 </div>
 <div class="stack" style="gap:16px" data-story="lightup">
 <div class="pills"><a href="/vilnius/" class="pill" data-m="up">Vilnius ir rajonas</a><a href="/kaunas/" class="pill" data-m="up">Kaunas ir rajonas</a></div>
@@ -223,7 +223,7 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <div class="panel-dark split" style="gap:48px 72px" data-m="card">
 <div class="stack">
 <h2 class="h2 h2-l" data-m="up">Sužinokite, kiek kainuos jūsų sklypas</h2>
-<p style="font-size:18px;line-height:1.6;color:var(--on-dark);max-width:26em" data-m="up">Keturi laukai – ir rangovas susisieks su jumis. Daugiau detalių galėsite pridėti <a href="/uzklausa/">išsamioje užklausoje</a>.</p>
+<p style="font-size:18px;line-height:1.6;color:var(--on-dark);max-width:26em" data-m="up">Užpildykite keturis laukus – paskambinsime ir suderinsime nemokamą apmatavimą. Daugiau detalių galite pridėti <a href="/uzklausa/">išsamioje užklausoje</a>.</p>
 </div>
 <div style="background:var(--paper);color:var(--forest);border-radius:var(--r-lg);padding:clamp(24px,3.4vw,40px)" data-m="up">
 ${shortForm({ source: 'pagrindinis' })}

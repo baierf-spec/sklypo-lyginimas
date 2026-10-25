@@ -1,17 +1,18 @@
 # sklypolyginimas.lt
 
-> Informacija apie sklypo lyginimą Lietuvoje: rinkos kainos 2026 m., darbų aprašymai su brėžiniais ir nemokama užklausa patikrintam rangovui. Darbus atlieka nepriklausomi partneriai rangovai.
+> Sklypų lyginimas visoje Lietuvoje: grubus lyginimas ir planiravimas, paruošimas vejai, nuolydžiai ir vandens nuvedimas, frezavimas, juodžemio atvežimas, sklypo paruošimas statyboms. Nemokamas apmatavimas, kaina raštu prieš darbus.
 
 ## Pagrindiniai faktai
-- Sklypo lyginimas Lietuvoje 2026 m. kainuoja 30–45 € už technikos valandą (vidurkis 37 €), buldozeris 50–70 €/val., mini ekskavatorius 25–35 €/val.
-- Juodžemis, smėlis, žvyras: 3–16 €/m³, pristatymas nuo 30 €. Drenažas: 10–30 €/m.
-- Vejai rekomenduojama 15–18 cm juodžemio: 1 arui reikia 15–18 m³.
-- Nuolydis nuo pamatų – 2–5 % pirmuosius 3 metrus.
-- Šaltinis: paslaugos.lt teikėjų kainos Vilniuje ir Kaune, 2026 m. spalis.
+- Sklypo lyginimas: 30–45 € už technikos valandą su operatoriumi, buldozeriu 50–70 €/val.
+- Technikos atvežimas nuo 30 €, drenažas 10–30 €/m, apmatavimas nemokamas.
+- Įprastą 10–15 arų sklypą išlyginame per 1–2 darbo dienas.
+- Vejai paskleidžiame 15–18 cm juodžemio: 1 arui reikia 15–18 m³.
+- Nuolydį nuo pamatų formuojame 2–5 % pirmuosius 3 metrus ir tikriname nivelyru.
+- Dirbame Vilniuje, Kaune ir jų rajonuose bei kituose Lietuvos miestuose.
 
 ## Puslapiai
-- [Sklypo lyginimo kaina 2026 ir skaičiuoklė](https://sklypolyginimas.lt/kaina/)
-- [Sklypo lyginimo darbai su brėžiniais](https://sklypolyginimas.lt/paslaugos/)
+- [Paslaugos](https://sklypolyginimas.lt/paslaugos/)
+- [Kainos ir skaičiuoklė](https://sklypolyginimas.lt/kaina/)
 - [Sklypo lyginimas Vilniuje](https://sklypolyginimas.lt/vilnius/)
 - [Sklypo lyginimas Kaune](https://sklypolyginimas.lt/kaunas/)
 - [Užklausa](https://sklypolyginimas.lt/uzklausa/)

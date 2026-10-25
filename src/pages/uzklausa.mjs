@@ -2,22 +2,22 @@ import { munOptions, photoDrop, consent, turnstile, doneIcon } from '../site.mjs
 
 export default {
   path: '/uzklausa/',
-  title: 'Užklausa – gaukite sklypo lyginimo pasiūlymą | sklypolyginimas.lt',
-  description: 'Aprašykite sklypą per dvi minutes ir gaukite patikrinto rangovo pasiūlymą raštu. Užklausa nemokama ir nieko neįpareigoja.',
+  title: 'Gaukite sklypo lyginimo pasiūlymą | sklypolyginimas.lt',
+  description: 'Aprašykite sklypą per dvi minutes – paskambinsime, nemokamai apmatuosime ir pateiksime kainą raštu.',
   headOpts: { minimal: true },
   body: `
 <section style="padding:24px 0 var(--sec)" data-mg data-stagger="90">
 <div class="wrap" style="display:flex;flex-wrap:wrap;gap:48px 72px;align-items:flex-start">
 <div class="stack" style="flex:1 1 320px;min-width:0;gap:32px">
 <h1 class="disp" style="font-size:clamp(42px,5vw,72px)" data-m="up">Pasiūlymas jūsų sklypui</h1>
-<p class="lead" data-m="up">Kuo daugiau papasakosite, tuo tikslesnę kainą rangovas pasakys jau pirmo pokalbio metu.</p>
+<p class="lead" data-m="up">Kuo daugiau papasakosite, tuo tikslesnę kainą pasakysime jau pirmo pokalbio metu.</p>
 <ol data-m="up" class="stepper" aria-label="Užklausos žingsniai" data-stepper>
 <li class="now"><span class="dot">1</span>Sklypas</li>
 <li><span class="dot">2</span>Darbai</li>
 <li><span class="dot">3</span>Laikas ir biudžetas</li>
 <li><span class="dot">4</span>Kontaktai</li>
 </ol>
-<p class="small" style="font-size:15px;max-width:24em;padding-top:20px;border-top:1px solid var(--line)">Užklausa nemokama. Ją gauna vienas patikrintas rangovas jūsų regione, o sprendimą priimate jūs.</p>
+<p class="small" style="font-size:15px;max-width:24em;padding-top:20px;border-top:1px solid var(--line)">Užklausa ir apmatavimas nemokami. Kainą pateikiame raštu, o sprendimą priimate jūs.</p>
 </div>
 
 <div class="panel" style="flex:999 1 560px;min-width:0" data-lead data-multistep data-m="card" data-d="150">
@@ -93,8 +93,8 @@ ${turnstile()}
 <div class="done" role="status" tabindex="-1">
 ${doneIcon}
 <h2 class="h2" style="font-size:40px">Užklausa išsiųsta</h2>
-<p class="lead">Rangovas susisieks su jumis tą pačią arba kitą darbo dieną ir suderins apmatavimo laiką. Kol laukiate, pasižiūrėkite, kiek kainuoja panašūs darbai.</p>
-<div class="row"><a href="/kaina/" class="btn">Atidaryti kainų gidą</a><a href="/" class="btn-o">Grįžti į pradžią</a></div>
+<p class="lead">Paskambinsime tą pačią arba kitą darbo dieną ir suderinsime nemokamo apmatavimo laiką. Kol laukiate, pasižiūrėkite mūsų įkainius.</p>
+<div class="row"><a href="/kaina/" class="btn">Peržiūrėti įkainius</a><a href="/" class="btn-o">Grįžti į pradžią</a></div>
 </div>
 </div>
 </div>

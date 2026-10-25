@@ -14,9 +14,9 @@ ${crumbs([{ name: 'Pradžia', path: '/' }, { name: 'Privatumo politika', path: '
 <h2>Kokius duomenis renkame</h2>
 <p>Vardą, telefono numerį, el. pašto adresą (jei nurodote), sklypo vietą, plotą, aprašymą ir nuotraukas, jei jas pridedate. Techniniais tikslais taip pat fiksuojamas užklausos laikas ir puslapis, iš kurio ji pateikta.</p>
 <h2>Kam naudojame duomenis</h2>
-<p>Tik tam, kad jūsų užklausą perduotume vienam rangovui, dirbančiam jūsų regione, ir jis galėtų su jumis susisiekti dėl pasiūlymo. Teisinis pagrindas – jūsų sutikimas, kurį pažymite pateikdami formą.</p>
+<p>Tik tam, kad galėtume su jumis susisiekti, apmatuoti sklypą ir pateikti pasiūlymą. Jei darbus jūsų regione atlieka mūsų partneris, užklausa perduodama jam. Teisinis pagrindas – jūsų sutikimas, kurį pažymite pateikdami formą.</p>
 <h2>Kam perduodame</h2>
-<p>Užklausą gauna vienas partneris rangovas jūsų regione. Duomenų neparduodame reklamos tikslais ir neperduodame kitiems tretiesiems asmenims, išskyrus paslaugų teikėjus, užtikrinančius svetainės veikimą (talpinimas ir el. pašto siuntimas – Cloudflare, Inc.).</p>
+<p>Užklausos duomenis gali gauti mūsų partneris, atliekantis darbus jūsų regione. Duomenų neparduodame reklamos tikslais ir neperduodame kitiems tretiesiems asmenims, išskyrus paslaugų teikėjus, užtikrinančius svetainės veikimą (talpinimas ir el. pašto siuntimas – Cloudflare, Inc.).</p>
 <h2>Kiek laiko saugome</h2>
 <p>Užklausų duomenis saugome ne ilgiau kaip 24 mėnesius, po to jie ištrinami.</p>
 <h2>Jūsų teisės</h2>

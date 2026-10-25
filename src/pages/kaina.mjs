@@ -1,20 +1,20 @@
 import { SITE, crumbs, crumbsSchema, checkIcon, faqSchema } from '../site.mjs';
 
-const C = [{ name: 'Pradžia', path: '/' }, { name: 'Sklypo lyginimo kaina', path: '/kaina/' }];
+const C = [{ name: 'Pradžia', path: '/' }, { name: 'Kainos', path: '/kaina/' }];
 
 const ROWS = [
-  ['Sklypo lyginimas', '30–45 € / val.', '37 €'],
-  ['Mini krautuvas (bobcat)', '30–45 € / val.', '39 €'],
-  ['Mini ekskavatorius', '25–35 € / val.', '32 €'],
-  ['Buldozeris', '50–70 € / val.', '58 €'],
-  ['Juodžemis, smėlis, žvyras', '3–16 € / m³', '9 €'],
-  ['Drenažas', '10–30 € / m', '16 €'],
-  ['Pristatymas', 'nuo 30 €', '–'],
+  ['Sklypo lyginimas mini krautuvu', '30–45 € / val.'],
+  ['Sklypo lyginimas buldozeriu', '50–70 € / val.'],
+  ['Kasimo darbai mini ekskavatoriumi', '25–35 € / val.'],
+  ['Juodžemis, smėlis, žvyras', 'pagal kiekį, nuo 3 € / m³'],
+  ['Drenažas', '10–30 € / m'],
+  ['Technikos atvežimas', 'nuo 30 €'],
+  ['Apmatavimas', 'nemokamai'],
 ];
 
 const QA = [
-  { q: 'Kiek kainuoja sklypo lyginimas 2026 m.?', a: 'Lietuvoje sklypo lyginimas kainuoja 30–45 € už technikos valandą (vidutiniškai 37 €), buldozeris – 50–70 € už valandą. Prie to pridedamas technikos atvežimas (nuo 30 €) ir juodžemis (3–16 € už m³), jei jo reikia.' },
-  { q: 'Kiek valandų užtrunka išlyginti sklypą?', a: 'Įprastas 10–15 arų sklypas dažniausiai išlyginamas per vieną–dvi darbo dienas. Laikas priklauso nuo reljefo, grunto ir technikos.' },
+  { q: 'Kiek kainuoja sklypo lyginimas?', a: 'Sklypus lyginame už 30–45 € technikos valandą su operatoriumi, buldozeriu – 50–70 € už valandą. Prie to pridedamas technikos atvežimas (nuo 30 €) ir juodžemis, jei jo reikia. Apmatavimas nemokamas.' },
+  { q: 'Per kiek laiko išlyginate sklypą?', a: 'Įprastą 10–15 arų sklypą dažniausiai išlyginame per vieną–dvi darbo dienas. Tikslų terminą pasakome po apmatavimo.' },
 ];
 
 const condBtn = (id, label, hint, path, on) => `<button type="button" class="opt" data-cond="${id}" aria-pressed="${on}"><svg width="72" height="22" viewBox="0 0 64 20" aria-hidden="true"><path d="${path}" fill="none" stroke="#6E4B33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><b>${label}</b><small>${hint}</small></button>`;
@@ -22,17 +22,17 @@ const condBtn = (id, label, hint, path, on) => `<button type="button" class="opt
 export default {
   path: '/kaina/',
   current: '/kaina/',
-  title: 'Sklypo lyginimo kaina 2026: įkainiai ir skaičiuoklė | sklypolyginimas.lt',
-  description: 'Kiek kainuoja sklypo lyginimas 2026 m.? 30–45 €/val., buldozeris 50–70 €/val., juodžemis 3–16 €/m³. Paskaičiuokite orientacinę kainą savo sklypui.',
+  title: 'Sklypo lyginimo kaina – įkainiai ir skaičiuoklė | sklypolyginimas.lt',
+  description: 'Mūsų įkainiai: sklypo lyginimas 30–45 €/val., buldozeriu 50–70 €/val. Paskaičiuokite orientacinę kainą, o tikslią pateiksime po nemokamo apmatavimo.',
   ogType: 'article',
   body: `
 <section style="padding:40px 0 clamp(48px,6vw,72px)" data-mg data-stagger="90">
 <div class="wrap stack" style="gap:36px">
 <div data-m="up">${crumbs(C)}</div>
 <div class="split end" style="gap:28px 64px">
-<h1 class="disp h1-l" data-m="up">Sklypo lyginimo kaina 2026 metais</h1>
+<h1 class="disp h1-l" data-m="up">Sklypo lyginimo kaina</h1>
 <div class="stack" style="gap:14px;padding-bottom:8px">
-<p class="lead" style="color:var(--ink-2)" data-m="up">Lietuvoje sklypo lyginimas kainuoja 30–45 € už technikos valandą, buldozeris – 50–70 €. Įprastas 10–15 arų sklypas dažniausiai išlyginamas per vieną–dvi darbo dienas.</p>
+<p class="lead" style="color:var(--ink-2)" data-m="up">Sklypus lyginame už 30–45 € technikos valandą, buldozeriu – 50–70 €. Įprastą 10–15 arų sklypą dažniausiai išlyginame per vieną–dvi darbo dienas. Apmatavimas nemokamas.</p>
 <p class="small" style="font-size:15px" data-m="up">Atnaujinta <time datetime="${SITE.updated}">${SITE.updatedLt}</time></p>
 </div>
 </div>
@@ -75,7 +75,7 @@ ${condBtn('rough', 'Po statybų', 'Molis, atliekos, dideli skirtumai', 'M2 16 L1
 <span style="font-size:16px;color:var(--on-dark)">Orientacinė kaina</span>
 <div class="stack" style="gap:8px"><span class="disp tnum" style="font-size:clamp(44px,4.6vw,64px)" data-total>–</span><span class="tnum" style="font-size:16px;color:var(--on-dark)" data-hours></span></div>
 <div class="calc-lines tnum" data-lines></div>
-<p class="small" style="color:var(--on-dark-2)">Skaičiuojama pagal 2026 m. rinkos įkainius ir tipinį technikos našumą. Tikslią kainą rangovas pateiks po apmatavimo.</p>
+<p class="small" style="color:var(--on-dark-2)">Skaičiuojama pagal mūsų orientacinius įkainius ir tipinį technikos našumą. Tikslią kainą pateiksime raštu po nemokamo apmatavimo.</p>
 <a href="/uzklausa/" class="btn-l" style="width:100%" data-calc-cta>Gauti tikslią kainą</a>
 </aside>
 </div>
@@ -85,14 +85,14 @@ ${condBtn('rough', 'Po statybų', 'Molis, atliekos, dideli skirtumai', 'M2 16 L1
 <section class="sec-b" data-mg>
 <div class="wrap split" style="gap:32px 80px">
 <div class="stack" style="gap:18px;max-width:26em">
-<h2 class="h2 h2-m" data-m="up">Žemės darbų įkainiai</h2>
-<p class="body-l" data-m="up">Teikėjų skelbiamos kainos Vilniuje ir Kaune. Dauguma skaičiuoja už valandą, todėl svarbiausia – sužinoti, kiek valandų užtruks jūsų sklypas.</p>
+<h2 class="h2 h2-m" data-m="up">Mūsų įkainiai</h2>
+<p class="body-l" data-m="up">Dirbame už technikos valandą su operatoriumi. Kiek valandų prireiks jūsų sklypui, pasakome po apmatavimo – ir įrašome į sąmatą.</p>
 </div>
 <div>
-<div class="tbl-wrap" data-m="up" data-story="trows"><table class="tbl tnum"><caption class="sr">Žemės darbų rinkos kainos 2026 m.</caption><thead><tr><th scope="col">Paslauga</th><th scope="col">Kaina</th><th scope="col">Vidurkis</th></tr></thead><tbody>
-${ROWS.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
+<div class="tbl-wrap" data-m="up" data-story="trows"><table class="tbl tnum"><caption class="sr">Sklypo lyginimo įkainiai</caption><thead><tr><th scope="col">Paslauga</th><th scope="col">Kaina</th></tr></thead><tbody>
+${ROWS.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}
 </tbody></table></div>
-<p class="small" style="margin-top:16px" data-m="up">Šaltinis: paslaugos.lt kategorijų suvestinės, 2026 m. spalis. Kainos orientacinės.</p>
+<p class="small" style="margin-top:16px" data-m="up">Kainos orientacinės. Galutinę sumą pateikiame raštu prieš pradedant darbus.</p>
 </div>
 </div>
 </section>
@@ -100,7 +100,7 @@ ${ROWS.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).j
 <section class="sec-b" data-mg>
 <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:24px">
 <div class="panel stack" style="gap:24px" data-m="card">
-<h2 class="h2 h2-s">Kas lemia kainą</h2>
+<h2 class="h2 h2-s">Nuo ko priklauso kaina</h2>
 <dl style="margin:0;display:flex;flex-direction:column;gap:18px">
 <div><dt style="font-size:18px;font-weight:650">Reljefas</dt><dd style="margin:4px 0 0" class="muted">Kuo didesni aukščių skirtumai, tuo daugiau valandų ir sunkesnės technikos.</dd></div>
 <div><dt style="font-size:18px;font-weight:650">Gruntas</dt><dd style="margin:4px 0 0" class="muted">Molis, akmenys ir statybinės atliekos lėtina darbą.</dd></div>
@@ -109,24 +109,24 @@ ${ROWS.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).j
 </dl>
 </div>
 <div class="panel stack" style="gap:24px" data-m="card">
-<h2 class="h2 h2-s">Kaip nepermokėti</h2>
+<h2 class="h2 h2-s">Kas visada įskaičiuota</h2>
 <ul class="cl">
-<li>${checkIcon()}Prašykite fiksuotos kainos raštu arba didžiausio valandų skaičiaus.</li>
-<li>${checkIcon()}Pasitikslinkite, ar į kainą įeina technikos atvežimas.</li>
-<li>${checkIcon()}Juodžemį skaičiuokite iš anksto: 1 aras × 15 cm = 15 m³.</li>
-<li>${checkIcon()}Lyginkite pasiūlymus pagal tą pačią darbų apimtį, ne pagal galutinę sumą.</li>
+<li>${checkIcon()}Nemokamas apmatavimas nivelyru prieš darbus.</li>
+<li>${checkIcon()}Sąmata raštu – kiekvienas darbas atskira eilute.</li>
+<li>${checkIcon()}Juodžemio kiekio paskaičiavimas: 1 aras × 15 cm = 15 m³.</li>
+<li>${checkIcon()}Nuolydžių patikrinimas ir sutvarkyta vieta po darbų.</li>
 </ul>
 </div>
 </div>
 </section>
 
 <section class="sec-b" data-mg><div class="wrap"><div class="panel-dark" data-m="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px">
-<h2 class="h2" style="font-size:clamp(30px,3.6vw,48px);max-width:16em">Tiksli kaina – tik apmatavus sklypą. Užklausa nemokama.</h2>
+<h2 class="h2" style="font-size:clamp(30px,3.6vw,48px);max-width:16em">Tikslią kainą pasakysime apmatavę sklypą. Apmatavimas nemokamas.</h2>
 <a href="/uzklausa/" class="btn-l">Gauti pasiūlymą</a>
 </div></div></section>`,
   schema: [
     crumbsSchema(C),
-    { '@type': 'Article', headline: 'Sklypo lyginimo kaina 2026 metais', dateModified: SITE.updated, inLanguage: 'lt-LT', publisher: { '@id': SITE.url + '/#org' }, mainEntityOfPage: SITE.url + '/kaina/' },
+    { '@type': 'Article', headline: 'Sklypo lyginimo kaina', dateModified: SITE.updated, inLanguage: 'lt-LT', publisher: { '@id': SITE.url + '/#org' }, mainEntityOfPage: SITE.url + '/kaina/' },
     faqSchema(QA),
   ],
 };
