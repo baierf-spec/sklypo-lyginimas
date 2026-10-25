@@ -106,7 +106,8 @@ export default {
 </div>
 </div>
 <figure class="slider" data-slider>${heroSvg}
-<input class="scrub" type="range" min="4" max="96" step="1" value="90" aria-label="Palyginkite sklypą prieš ir po lyginimo">
+<input class="scrub" type="range" min="2" max="98" step="1" value="90" aria-label="Palyginkite sklypą prieš ir po lyginimo. Naudokite rodykles kairėn ir dešinėn.">
+<span class="slider-hint" aria-hidden="true">Tempkite, kad pamatytumėte skirtumą</span>
 </figure>
 <ul class="ticks">
 <li>${checkIcon(18)}Užklausa nemokama ir nieko neįpareigoja</li>

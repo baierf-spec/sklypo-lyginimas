@@ -18,7 +18,40 @@
       handle.setAttribute('transform', 'translate(' + x + ' 230)');
     };
     var stopped = false;
-    input.addEventListener('input', function () { stopped = true; set(+input.value); });
+    var touch = function () { stopped = true; fig.classList.add('touched'); };
+    input.addEventListener('input', function () { touch(); set(+input.value); });
+
+    // Drag or tap anywhere on the picture (mouse, pen and touch)
+    var dragging = false, startX = 0, startY = 0, decided = false;
+    var posFromEvent = function (e) {
+      var r = fig.getBoundingClientRect();
+      var p = ((e.clientX - r.left) / r.width) * 100;
+      return Math.max(2, Math.min(98, p));
+    };
+    var apply = function (e) { var p = posFromEvent(e); set(p); input.value = Math.round(p); };
+    fig.addEventListener('pointerdown', function (e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      dragging = true; decided = e.pointerType !== 'touch'; startX = e.clientX; startY = e.clientY;
+      touch();
+      if (decided) { fig.setPointerCapture(e.pointerId); fig.classList.add('dragging'); apply(e); }
+    });
+    fig.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      if (!decided) {
+        // on touch: horizontal swipe drags the slider, vertical swipe scrolls the page
+        var dx = Math.abs(e.clientX - startX), dy = Math.abs(e.clientY - startY);
+        if (dx < 6 && dy < 6) return;
+        if (dy > dx) { dragging = false; return; }
+        decided = true; fig.setPointerCapture(e.pointerId); fig.classList.add('dragging');
+      }
+      e.preventDefault(); apply(e);
+    });
+    var end = function (e) {
+      if (dragging && !decided && e.type === 'pointerup') apply(e); // simple tap
+      dragging = false; fig.classList.remove('dragging');
+    };
+    fig.addEventListener('pointerup', end);
+    fig.addEventListener('pointercancel', end);
     if (reduce) { input.value = 50; set(50); return; }
     var from = 90, to = 50, dur = 1700, delay = 700, start = null;
     var ease = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
