@@ -47,7 +47,8 @@ Pasirenkami: `TURNSTILE_SECRET_KEY` (secret) ir `TURNSTILE_SITE_KEY` (GitHub Act
 - Zona `sklypolyginimas.lt` aktyvi, Worker'is pririštas prie `sklypolyginimas.lt` ir `www.sklypolyginimas.lt` (www → apex 301).
 - Email Routing: `uzklausa@` ir `info@sklypolyginimas.lt` peradresuojami į `ADMIN_EMAIL`.
 - Turnstile: widget'as „sklypolyginimas“, slaptas raktas Worker'io secret `TURNSTILE_SECRET_KEY`, viešas raktas build metu (`TURNSTILE_SITE_KEY`).
-- Email Sending: siuntėjas `uzklausa@sklypolyginimas.lt`; jei domenas dar neįjungtas Email Sending, automatiškai naudojamas `EMAIL_FROM_FALLBACK`.
+- Laiškai adminui: siuntėjas `uzklausa@sklypolyginimas.lt` (domene įjungtas Email Routing), gavėjas – patvirtintas Email Routing adresas `ADMIN_EMAIL`. Siuntimas patvirtintam adresui nemokamas ir veikia be Workers Paid / Email Sending. Atsarginis siuntėjas – `EMAIL_FROM_FALLBACK`.
+- Klientams laiškų (pvz., patvirtinimų) siųsti negalima, kol paskyroje nėra Workers Paid plano.
 - `SEO_INDEXABLE=true`: robots.txt leidžia indeksuoti, sitemap `/sitemap.xml`.
 
 ## Užklausų peržiūra
