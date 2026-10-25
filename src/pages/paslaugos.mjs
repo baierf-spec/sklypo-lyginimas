@@ -62,8 +62,8 @@ const blocks = [
 export default {
   path: '/paslaugos/',
   current: '/paslaugos/',
-  title: 'Sklypo lyginimo paslaugos: planiravimas, nuolydžiai, veja | sklypolyginimas.lt',
-  description: 'Atliekame grubų sklypo lyginimą, paruošiame vejai, formuojame nuolydžius, frezuojame, atvežame juodžemį ir paruošiame sklypą statyboms. Nemokamas apmatavimas.',
+  title: 'Sklypo lyginimo paslaugos: planiravimas, nuolydžiai, veja',
+  description: 'Grubus sklypo lyginimas, paruošimas vejai, nuolydžiai ir drenažas, frezavimas, juodžemio atvežimas, paruošimas statyboms. Nemokamas matavimas.',
   body: `
 <section style="padding:40px 0 clamp(56px,7vw,88px)" data-mg data-stagger="90">
 <div class="wrap stack" style="gap:36px">

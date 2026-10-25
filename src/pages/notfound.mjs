@@ -2,6 +2,7 @@ export default {
   path: '/404.html',
   file: '404.html',
   noSitemap: true,
+  noindex: true,
   title: 'Puslapis nerastas | sklypolyginimas.lt',
   description: 'Tokio puslapio nėra.',
   body: `

@@ -81,7 +81,7 @@ ${turnstile()}
 <div class="done" role="status" tabindex="-1">
 ${doneIcon}
 <h3 class="h2" style="font-size:32px">Užklausa išsiųsta</h3>
-<p style="font-size:17px;line-height:1.6" class="${dark ? '' : 'muted'}">Paskambinsime tą pačią arba kitą darbo dieną ir suderinsime nemokamo apmatavimo laiką.</p>
+<p style="font-size:17px;line-height:1.6" class="${dark ? '' : 'muted'}">Paskambinsime tą pačią arba kitą darbo dieną ir suderinsime nemokamo matavimo laiką.</p>
 </div>
 </div>`;
 };
@@ -114,19 +114,21 @@ export const footer = () => `
 </div>
 <nav aria-label="Puslapiai"><a href="/paslaugos/">Sklypo lyginimo paslaugos</a><a href="/kaina/">Kainos ir skaičiuoklė</a><a href="/uzklausa/">Užklausa</a><a href="/privatumo-politika/">Privatumo politika</a></nav>
 <nav aria-label="Miestai"><a href="/vilnius/">Sklypo lyginimas Vilniuje</a><a href="/kaunas/">Sklypo lyginimas Kaune</a></nav>
-<div class="stack" style="gap:12px;font-size:16px"><span class="ttl" style="font-weight:600">Užklausos</span><a href="/uzklausa/">Gauti pasiūlymą</a><span class="muted" style="font-size:15px">Apmatavimas nemokamas</span></div>
+<div class="stack" style="gap:12px;font-size:16px"><span class="ttl" style="font-weight:600">Užklausos</span><a href="/uzklausa/">Gauti pasiūlymą</a><span class="muted" style="font-size:15px">Matavimas nemokamas</span></div>
 </div>
 <p class="small">© 2026 sklypolyginimas.lt</p>
 </div></footer>`;
 
 /** Full HTML document. */
 export const layout = ({ path, title, description, body, schema = [], current, headOpts = {}, ogType = 'website', noindex = false }) => {
+  const crumbNode = schema.find((x) => x['@type'] === 'BreadcrumbList');
   const canonical = SITE.url + path;
   const graph = {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'WebSite', '@id': SITE.url + '/#website', url: SITE.url + '/', name: SITE.name, inLanguage: 'lt-LT' },
-      { '@type': 'Organization', '@id': SITE.url + '/#org', name: SITE.name, url: SITE.url + '/', logo: SITE.url + '/icon-512.png' },
+      { '@type': 'Organization', '@id': SITE.url + '/#org', name: SITE.name, url: SITE.url + '/', logo: SITE.url + '/icon-512.png', email: 'info@sklypolyginimas.lt', areaServed: { '@type': 'Country', name: 'Lietuva' }, knowsAbout: ['Sklypo lyginimas', 'Sklypo planiravimas', 'Nuolydžių formavimas', 'Paruošimas vejai', 'Juodžemio atvežimas', 'Drenažas'] },
+      { '@type': 'WebPage', '@id': canonical + '#webpage', url: canonical, name: title, description, inLanguage: 'lt-LT', isPartOf: { '@id': SITE.url + '/#website' }, about: { '@id': SITE.url + '/#org' }, dateModified: SITE.updated, primaryImageOfPage: SITE.url + '/og.png', ...(crumbNode ? { breadcrumb: crumbNode } : {}) },
       ...schema,
     ],
   };
@@ -137,7 +139,10 @@ export const layout = ({ path, title, description, body, schema = [], current, h
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-${noindex ? '<meta name="robots" content="noindex, nofollow">' : ''}
+<meta name="robots" content="${noindex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'}">
+<link rel="alternate" hreflang="lt" href="${canonical}">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="${ogType}">
 <meta property="og:locale" content="lt_LT">

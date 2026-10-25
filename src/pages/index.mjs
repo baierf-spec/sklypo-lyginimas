@@ -1,11 +1,11 @@
 import { SITE, faq, faqSchema, shortForm, checkIcon } from '../site.mjs';
 
 const FAQ = [
-  { q: 'Kiek kainuoja išlyginti 10 arų sklypą?', a: 'Dirbame 30–45 € už technikos valandą su operatoriumi. Kiek valandų prireiks, priklauso nuo reljefo ir grunto: lygiam sklypui – mažiau, kauburiuotam ar po statybų – daugiau. Tikslią kainą pasakome po nemokamo apmatavimo, o orientacinę galite paskaičiuoti <a href="/kaina/">skaičiuoklėje</a>.' },
+  { q: 'Kiek kainuoja išlyginti 10 arų sklypą?', a: 'Dirbame 30–45 € už technikos valandą su operatoriumi. Kiek valandų prireiks, priklauso nuo reljefo ir grunto: lygiam sklypui – mažiau, kauburiuotam ar po statybų – daugiau. Tikslią kainą pasakome po nemokamo matavimo, o orientacinę galite paskaičiuoti <a href="/kaina/">skaičiuoklėje</a>.' },
   { q: 'Kada geriausia lyginti sklypą?', a: 'Dirbame nuo pavasario, kai žemė pradžiūsta, iki vėlyvo rudens. Molingo grunto po liūčių neliečiame – technika jį suspaustų, ir vanduo nebesigertų. Tokiu atveju palaukiame sausesnių dienų.' },
-  { q: 'Kiek juodžemio reikia vejai?', a: 'Vejai reikia 15–18 cm derlingo sluoksnio: vienam arui – 15–18 m³, dešimčiai arų – 150–180 m³. Apmatuodami įvertiname, kiek geros žemės sklype jau yra, ir pasakome, kiek reikia atvežti.' },
+  { q: 'Kiek juodžemio reikia vejai?', a: 'Vejai reikia 15–18 cm derlingo sluoksnio: vienam arui – 15–18 m³, dešimčiai arų – 150–180 m³. Matuodami įvertiname, kiek geros žemės sklype jau yra, ir pasakome, kiek reikia atvežti.' },
   { q: 'Kokia technika dirbate?', a: 'Kiemams tarp tvorų naudojame mini krautuvą, dideliems plotams ir aukščių skirtumams – buldozerį. Nuolydžius tikriname lazeriniu nivelyru, paviršių sutankiname volu.' },
-  { q: 'Ar atvažiuojate apžiūrėti sklypo?', a: 'Taip. Apmatavimas nemokamas ir nieko neįpareigoja: išmatuojame aukščius, įvertiname gruntą ir privažiavimą, o kainą atsiunčiame raštu.' },
+  { q: 'Ar atvažiuojate apžiūrėti sklypo?', a: 'Taip. Matavimas nemokamas ir nieko neįpareigoja: išmatuojame aukščius, įvertiname gruntą ir privažiavimą, o kainą atsiunčiame raštu.' },
 ];
 
 const REQ = [
@@ -103,8 +103,8 @@ const price = (label, a, b, unit) => `<div data-m="up"><dt>${label}</dt><dd><spa
 
 export default {
   path: '/',
-  title: 'Sklypo lyginimas – nuo 30 €/val., nemokamas apmatavimas | sklypolyginimas.lt',
-  description: 'Lyginame sklypus, formuojame nuolydžius ir paruošiame vejai visoje Lietuvoje. 30–45 €/val., nemokamas apmatavimas, kaina raštu prieš darbus.',
+  title: 'Sklypo lyginimas ir planiravimas – kaina nuo 30 €/val.',
+  description: 'Lyginame sklypus, formuojame nuolydžius ir paruošiame vejai Vilniuje, Kaune ir visoje Lietuvoje. Nuo 30 €/val., nemokamas matavimas, kaina raštu.',
   body: `
 <section data-mg data-stagger="90">
 <div class="wrap stack" style="gap:40px;padding-top:40px">
@@ -120,7 +120,7 @@ export default {
 <span class="slider-hint" aria-hidden="true">Tempkite, kad pamatytumėte skirtumą</span>
 </figure>
 <ul class="ticks">
-<li data-m="up">${checkIcon(18)}Nemokamas apmatavimas</li>
+<li data-m="up">${checkIcon(18)}Nemokamas matavimas</li>
 <li data-m="up">${checkIcon(18)}Nuolydžiai matuojami nivelyru</li>
 <li data-m="up">${checkIcon(18)}Kaina raštu prieš darbus</li>
 </ul>
@@ -132,7 +132,7 @@ export default {
 <div class="stack" style="gap:24px;max-width:34em">
 <h2 class="h2 h2-l" data-m="up">Kiek kainuoja sklypo lyginimas</h2>
 <p style="font-size:19px;line-height:1.6;color:var(--ink-2)" data-m="up">Dirbame už technikos valandą su operatoriumi: mini krautuvu – 30–45 €, buldozeriu – 50–70 €. Buldozeris brangesnis, bet didelius plotus išlygina gerokai greičiau. Prie sumos pridedamas technikos atvežimas ir juodžemis, jei jo trūksta.</p>
-<p class="muted" data-m="up">Tikslią kainą pasakome po nemokamo apmatavimo ir pateikiame raštu – su kiekvienu darbu atskira eilute.</p>
+<p class="muted" data-m="up">Tikslią kainą pasakome po nemokamo matavimo ir pateikiame raštu – su kiekvienu darbu atskira eilute.</p>
 <a href="/kaina/" style="font-weight:600" data-m="up">Atidaryti kainų skaičiuoklę</a>
 </div>
 <div class="panel" style="padding-block:12px 24px" data-m="card" data-story="rows">
@@ -142,7 +142,7 @@ ${price('Buldozeris', 50, 70, 'val.')}
 ${price('Mini ekskavatorius', 25, 35, 'val.')}
 ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 </dl>
-<p class="small" style="margin-top:8px" data-m="up">Orientaciniai įkainiai 2026 m. Galutinė kaina – po apmatavimo.</p>
+<p class="small" style="margin-top:8px" data-m="up">Orientaciniai įkainiai 2026 m. Galutinė kaina – po matavimo.</p>
 </div>
 </div>
 </section>
@@ -162,7 +162,7 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <h2 class="h2 h2-l" style="max-width:14em" data-m="up">Nuo užklausos iki lygaus sklypo – trys žingsniai</h2>
 <ol class="steps">
 <li data-m="up"><span class="disp tnum n">1</span><h3>Aprašote sklypą</h3><p>Vieta, plotas, ko reikia ir, jei norite, kelios nuotraukos. Užtrunka dvi minutes.</p></li>
-<li data-m="up"><span class="disp tnum n">2</span><h3>Atvažiuojame apmatuoti</h3><p>Paskambiname tą pačią arba kitą darbo dieną ir suderiname laiką. Apmatavimas nemokamas.</p></li>
+<li data-m="up"><span class="disp tnum n">2</span><h3>Atvažiuojame išmatuoti</h3><p>Paskambiname tą pačią arba kitą darbo dieną ir suderiname laiką. Matavimas nemokamas.</p></li>
 <li data-m="up"><span class="disp tnum n">3</span><h3>Išlyginame sklypą</h3><p>Atsiunčiame kainą raštu. Jums sutikus, sutartą dieną atliekame darbus ir kartu patikriname nuolydžius.</p></li>
 </ol>
 <div data-m="up"><a href="/uzklausa/" class="btn-l">Pradėti užklausą</a></div>
@@ -223,7 +223,7 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <div class="panel-dark split" style="gap:48px 72px" data-m="card">
 <div class="stack">
 <h2 class="h2 h2-l" data-m="up">Sužinokite, kiek kainuos jūsų sklypas</h2>
-<p style="font-size:18px;line-height:1.6;color:var(--on-dark);max-width:26em" data-m="up">Užpildykite keturis laukus – paskambinsime ir suderinsime nemokamą apmatavimą. Daugiau detalių galite pridėti <a href="/uzklausa/">išsamioje užklausoje</a>.</p>
+<p style="font-size:18px;line-height:1.6;color:var(--on-dark);max-width:26em" data-m="up">Užpildykite keturis laukus – paskambinsime ir suderinsime nemokamą matavimą. Daugiau detalių galite pridėti <a href="/uzklausa/">išsamioje užklausoje</a>.</p>
 </div>
 <div style="background:var(--paper);color:var(--forest);border-radius:var(--r-lg);padding:clamp(24px,3.4vw,40px)" data-m="up">
 ${shortForm({ source: 'pagrindinis' })}
@@ -234,5 +234,10 @@ ${shortForm({ source: 'pagrindinis' })}
   schema: [
     { '@type': 'Service', name: 'Sklypo lyginimas', serviceType: 'Sklypo lyginimas ir planiravimas', areaServed: { '@type': 'Country', name: 'Lietuva' }, provider: { '@id': SITE.url + '/#org' }, offers: { '@type': 'AggregateOffer', priceCurrency: 'EUR', lowPrice: 30, highPrice: 45, description: 'Kaina už technikos valandą' } },
     faqSchema(FAQ),
+    { '@type': 'HowTo', name: 'Kaip užsakyti sklypo lyginimą', totalTime: 'P2D', step: [
+      { '@type': 'HowToStep', position: 1, name: 'Aprašote sklypą', text: 'Užpildote užklausą: vieta, plotas, reikalingi darbai, nuotraukos.', url: SITE.url + '/uzklausa/' },
+      { '@type': 'HowToStep', position: 2, name: 'Atvažiuojame išmatuoti', text: 'Paskambiname tą pačią arba kitą darbo dieną ir nemokamai išmatuojame sklypą nivelyru.' },
+      { '@type': 'HowToStep', position: 3, name: 'Išlyginame sklypą', text: 'Atsiunčiame kainą raštu ir sutartą dieną atliekame darbus, patikriname nuolydžius.' },
+    ] },
   ],
 };

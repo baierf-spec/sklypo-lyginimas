@@ -22,14 +22,14 @@ const CITIES = [
 const page = (c) => {
   const C = [{ name: 'Pradžia', path: '/' }, { name: 'Miestai', path: '/#miestai' }, { name: c.name, path: `/${c.slug}/` }];
   const QA = [
-    { q: `Kiek kainuoja sklypo lyginimas ${c.loc}?`, a: `Sklypus ${c.loc} lyginame už 30–45 € technikos valandą. Galutinė kaina priklauso nuo reljefo, grunto ir atstumo – tikslią pasakome po nemokamo apmatavimo.` },
+    { q: `Kiek kainuoja sklypo lyginimas ${c.loc}?`, a: `Sklypus ${c.loc} lyginame už 30–45 € technikos valandą. Galutinė kaina priklauso nuo reljefo, grunto ir atstumo – tikslią pasakome po nemokamo matavimo.` },
     { q: `Ar dirbate ${c.gen} rajone?`, a: `Taip, dirbame visame ${c.gen} mieste ir rajone. Į atokesnes vietas technikos atvežimas gali kainuoti daugiau.` },
     { q: 'Kaip greitai galite pradėti?', a: 'Priklauso nuo sezono. Pavasarį ir rudenį darbų daugiausia, todėl verta užsisakyti bent viena–dviem savaitėmis anksčiau.' },
   ];
   return {
     path: `/${c.slug}/`,
-    title: `Sklypo lyginimas ${c.loc} – nuo 30 €/val. | sklypolyginimas.lt`,
-    description: `Lyginame sklypus ${c.loc} ir ${c.gen} rajone: planiravimas, nuolydžiai, paruošimas vejai. 30–45 €/val., nemokamas apmatavimas, kaina raštu prieš darbus.`,
+    title: `Sklypo lyginimas ${c.loc} ir rajone – nuo 30 €/val.`,
+    description: `Sklypo lyginimas ${c.loc} ir ${c.gen} rajone: planiravimas, nuolydžiai, paruošimas vejai. Nuo 30 €/val., nemokamas matavimas, kaina raštu prieš darbus.`,
     body: `
 <section style="padding:40px 0 var(--sec)" data-mg data-stagger="90">
 <div class="wrap stack" style="gap:36px">
@@ -40,7 +40,7 @@ const page = (c) => {
 <p class="lead" style="color:var(--ink-2)" data-m="up">Lyginame sklypus ${c.loc} ir visame ${c.gen} rajone – nuo grubaus planiravimo iki paruošimo vejai. Atvažiuojame, išmatuojame nivelyru ir pateikiame kainą raštu prieš darbus.</p>
 <dl class="stats" data-m="up">
 <div><dt>už technikos valandą</dt><dd class="disp tnum"><span class="count" data-count="30,45">30–45</span> €</dd></div>
-<div><dt>apmatavimas</dt><dd class="disp tnum"><span class="count" data-count="0">0</span> €</dd></div>
+<div><dt>matavimas</dt><dd class="disp tnum"><span class="count" data-count="0">0</span> €</dd></div>
 </dl>
 <p class="small" data-m="up">Atnaujinta <time datetime="${SITE.updated}">${SITE.updatedLt}</time>.</p>
 </div>
@@ -65,7 +65,7 @@ ${shortForm({ source: c.slug, dark: true, municipality: c.municipality, villages
 <h2 class="h2 h2-s">Sklypai ${c.gen} rajone</h2>
 <p class="muted" style="line-height:1.65">${c.local}</p>
 <ol class="stepper">
-<li class="now" style="font-weight:600">Apmatuodami visada patikriname:</li>
+<li class="now" style="font-weight:600">Matuodami visada patikriname:</li>
 <li class="now"><span class="dot">1</span>Sklypo ribas ir kaimynų sklypų aukščius.</li>
 <li class="now"><span class="dot">2</span>Kur galima nuvesti lietaus vandenį.</li>
 <li class="now"><span class="dot">3</span>Privažiavimą technikai: vartų plotį, dangas, medžius.</li>

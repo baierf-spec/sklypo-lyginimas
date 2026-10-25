@@ -2,8 +2,8 @@ import { munOptions, photoDrop, consent, turnstile, doneIcon } from '../site.mjs
 
 export default {
   path: '/uzklausa/',
-  title: 'Gaukite sklypo lyginimo pasiūlymą | sklypolyginimas.lt',
-  description: 'Aprašykite sklypą per dvi minutes – paskambinsime, nemokamai apmatuosime ir pateiksime kainą raštu.',
+  title: 'Sklypo lyginimo užklausa – nemokamas matavimas',
+  description: 'Aprašykite sklypą per dvi minutes – paskambinsime, nemokamai išmatuosime ir pateiksime kainą raštu.',
   headOpts: { minimal: true },
   body: `
 <section style="padding:24px 0 var(--sec)" data-mg data-stagger="90">
@@ -17,7 +17,7 @@ export default {
 <li><span class="dot">3</span>Laikas ir biudžetas</li>
 <li><span class="dot">4</span>Kontaktai</li>
 </ol>
-<p class="small" style="font-size:15px;max-width:24em;padding-top:20px;border-top:1px solid var(--line)">Užklausa ir apmatavimas nemokami. Kainą pateikiame raštu, o sprendimą priimate jūs.</p>
+<p class="small" style="font-size:15px;max-width:24em;padding-top:20px;border-top:1px solid var(--line)">Užklausa ir matavimas nemokami. Kainą pateikiame raštu, o sprendimą priimate jūs.</p>
 </div>
 
 <div class="panel" style="flex:999 1 560px;min-width:0" data-lead data-multistep data-m="card" data-d="150">
@@ -93,7 +93,7 @@ ${turnstile()}
 <div class="done" role="status" tabindex="-1">
 ${doneIcon}
 <h2 class="h2" style="font-size:40px">Užklausa išsiųsta</h2>
-<p class="lead">Paskambinsime tą pačią arba kitą darbo dieną ir suderinsime nemokamo apmatavimo laiką. Kol laukiate, pasižiūrėkite mūsų įkainius.</p>
+<p class="lead">Paskambinsime tą pačią arba kitą darbo dieną ir suderinsime nemokamo matavimo laiką. Kol laukiate, pasižiūrėkite mūsų įkainius.</p>
 <div class="row"><a href="/kaina/" class="btn">Peržiūrėti įkainius</a><a href="/" class="btn-o">Grįžti į pradžią</a></div>
 </div>
 </div>

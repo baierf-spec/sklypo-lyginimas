@@ -37,8 +37,12 @@ export default {
 
     if (url.pathname === '/robots.txt') {
       const origin = env.SITE_ORIGIN || url.origin;
+      const AI = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot', 'Applebot-Extended', 'Bingbot', 'DuckAssistBot', 'meta-externalagent', 'MistralAI-User', 'cohere-ai', 'YouBot'];
+      const rules = 'Allow: /\nDisallow: /api/\nDisallow: /rangovams/\n';
       const body = isTrue(env.SEO_INDEXABLE)
-        ? `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${origin}/sitemap.xml\n`
+        ? `# sklypolyginimas.lt – paieškos ir AI asistentai kviečiami indeksuoti visą viešą turinį\n# Content-Signal: search=yes, ai-input=yes, ai-train=yes\n\nUser-agent: *\nContent-Signal: search=yes, ai-input=yes, ai-train=yes\n${rules}\n` +
+          AI.map((b) => `User-agent: ${b}\n${rules}`).join('\n') +
+          `\nSitemap: ${origin}/sitemap.xml\n\n# Santrauka AI sistemoms: ${origin}/llms.txt\n# Visas turinys: ${origin}/llms-full.txt\n`
         : 'User-agent: *\nDisallow: /\n';
       return new Response(body, { headers: { 'content-type': 'text/plain; charset=utf-8' } });
     }
