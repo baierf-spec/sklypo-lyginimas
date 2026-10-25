@@ -1,0 +1,51 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sklypolyginimas",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-19",
+  "account_id": "59cf79e5a4e2dd1a9a5c3181684c43d7",
+  "workers_dev": true,
+  "preview_urls": false,
+
+  // Static site built by `npm run build`
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": true
+  },
+
+  // Cloudflare Email Service – sends lead notifications to ADMIN_EMAIL
+  "send_email": [{ "name": "EMAIL" }],
+
+  // Lead storage
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sklypolyginimas-leads",
+      "database_id": "3635fc68-2020-4758-9a20-6c1d5dd9dc74",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Uncomment once sklypolyginimas.lt is active on Cloudflare (nameservers changed)
+  // "routes": [
+  //   { "pattern": "sklypolyginimas.lt", "custom_domain": true },
+  //   { "pattern": "www.sklypolyginimas.lt", "custom_domain": true }
+  // ],
+
+  "vars": {
+    "ADMIN_EMAIL": "marek.cernevic@gmail.com",
+    // Must be on a domain onboarded to Email Sending. Switch to uzklausa@sklypolyginimas.lt once that domain is onboarded.
+    "EMAIL_FROM": "uzklausa@drenazoirengimas.lt",
+    "SITE_ORIGIN": "https://sklypolyginimas.lt",
+    "ALLOWED_ORIGINS": "https://sklypolyginimas.lt,https://www.sklypolyginimas.lt,https://sklypolyginimas.baier-f.workers.dev",
+    "LEADS_ENABLED": "true",
+    // Set to "true" when the site goes live on its own domain (robots.txt + noindex header)
+    "SEO_INDEXABLE": "false"
+  },
+
+  "observability": { "enabled": true }
+  // Secret (optional): TURNSTILE_SECRET_KEY  →  npx wrangler secret put TURNSTILE_SECRET_KEY
+}

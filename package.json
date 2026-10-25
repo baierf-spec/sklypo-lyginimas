@@ -1,0 +1,15 @@
+{
+  "name": "sklypolyginimas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler d1 migrations apply sklypolyginimas-leads --remote && wrangler deploy",
+    "check": "node --check worker/index.js && node build.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.152.0"
+  },
+  "engines": { "node": ">=20" }
+}
