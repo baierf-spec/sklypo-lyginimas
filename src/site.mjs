@@ -51,7 +51,7 @@ const turnstile = () => SITE.turnstileSiteKey ? `<div class="cf-turnstile" data-
 
 const munOptions = (placeholder = true) => (placeholder ? '<option value="">Pasirinkite</option>' : '') + MUNICIPALITIES.map((m) => `<option>${m}</option>`).join('');
 
-export const consent = () => `<label class="check"><input type="checkbox" name="sutikimas" value="taip" required>Sutinku, kad mano duomenys būtų naudojami šiai užklausai pagal <a href="/privatumo-politika/">privatumo politiką</a>.</label>`;
+export const consent = () => `<label class="check"><input type="checkbox" name="sutikimas" value="taip" required><span>Sutinku, kad mano duomenys būtų naudojami šiai užklausai pagal <a href="/privatumo-politika/">privatumo politiką</a>.</span></label>`;
 
 /** Short lead form (4 fields + photos). */
 export const shortForm = ({ source, dark = false, municipality, villages } = {}) => {
