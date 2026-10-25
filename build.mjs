@@ -21,7 +21,7 @@ await cp('public', OUT, { recursive: true });
 await cp('src/assets', join(OUT, 'assets'), { recursive: true });
 
 const css = await readFile('src/assets/styles.css');
-const js = await readFile('src/assets/app.js');
+const js = Buffer.concat([await readFile('src/assets/app.js'), await readFile('src/assets/motion.js')]);
 const v = createHash('sha1').update(css).update(js).digest('hex').slice(0, 8);
 
 for (const p of pages) {

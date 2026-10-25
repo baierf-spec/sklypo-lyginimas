@@ -151,6 +151,7 @@ export const layout = ({ path, title, description, body, schema = [], current, h
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<script>(function(d){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('m');setTimeout(function(){if(!window.__m)d.classList.remove('m')},3500)}}catch(e){}})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap">
@@ -164,6 +165,7 @@ ${header(current, headOpts)}
 ${body}
 </main>
 ${footer()}
+<script src="/assets/motion.js?v=__V__" defer></script>
 <script src="/assets/app.js?v=__V__" defer></script>
 </body>
 </html>

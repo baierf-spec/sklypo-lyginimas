@@ -31,20 +31,20 @@ const page = (c) => {
     title: `Sklypo lyginimas ${c.loc} – kaina 2026 | sklypolyginimas.lt`,
     description: `Sklypo lyginimas ${c.loc} ir ${c.gen} rajone: 30–45 €/val. (vid. ${c.avg} €). Nemokama užklausa patikrintam ${c.gen} regiono rangovui, kaina raštu prieš darbus.`,
     body: `
-<section style="padding:40px 0 var(--sec)">
+<section style="padding:40px 0 var(--sec)" data-mg data-stagger="90">
 <div class="wrap stack" style="gap:36px">
-${crumbs(C)}
+<div data-m="up">${crumbs(C)}</div>
 <div class="split" style="gap:48px 72px">
 <div class="stack" style="gap:28px">
-<h1 class="disp h1-l">Sklypo lyginimas ${c.loc} ir ${c.gen} rajone</h1>
-<p class="lead" style="color:var(--ink-2)">${c.name === 'Vilnius' ? 'Vilniuje' : c.loc} sklypo lyginimas kainuoja 30–45 € už technikos valandą, vidutiniškai ${c.avg} €. Paslaugas skelbia apie ${c.providers} teikėjų, todėl pasiūlymai labai skiriasi – palyginti verta pagal tą pačią darbų apimtį.</p>
-<dl class="stats">
-<div><dt>vidutinė kaina už valandą</dt><dd class="disp tnum">${c.avg} €</dd></div>
-<div><dt>teikėjų ${c.loc}</dt><dd class="disp tnum">${c.providers}</dd></div>
+<h1 class="disp h1-l" data-m="up">Sklypo lyginimas ${c.loc} ir ${c.gen} rajone</h1>
+<p class="lead" style="color:var(--ink-2)" data-m="up">${c.name === 'Vilnius' ? 'Vilniuje' : c.loc} sklypo lyginimas kainuoja 30–45 € už technikos valandą, vidutiniškai ${c.avg} €. Paslaugas skelbia apie ${c.providers} teikėjų, todėl pasiūlymai labai skiriasi – palyginti verta pagal tą pačią darbų apimtį.</p>
+<dl class="stats" data-m="up">
+<div><dt>vidutinė kaina už valandą</dt><dd class="disp tnum"><span class="count" data-count="${c.avg}">${c.avg}</span> €</dd></div>
+<div><dt>teikėjų ${c.loc}</dt><dd class="disp tnum"><span class="count" data-count="${c.providers}">${c.providers}</span></dd></div>
 </dl>
-<p class="small">Šaltinis: paslaugos.lt, 2026 m. spalis. Atnaujinta <time datetime="${SITE.updated}">${SITE.updatedLt}</time>.</p>
+<p class="small" data-m="up">Šaltinis: paslaugos.lt, 2026 m. spalis. Atnaujinta <time datetime="${SITE.updated}">${SITE.updatedLt}</time>.</p>
 </div>
-<div id="greita" class="panel-dark" style="padding:clamp(24px,3.6vw,44px)">
+<div id="greita" class="panel-dark" style="padding:clamp(24px,3.6vw,44px)" data-m="card" data-d="200">
 <h2 class="h2" style="font-size:32px;margin-bottom:20px">Užklausa ${c.gen} regione</h2>
 ${shortForm({ source: c.slug, dark: true, municipality: c.municipality, villages: c.villages })}
 </div>
@@ -52,16 +52,16 @@ ${shortForm({ source: c.slug, dark: true, municipality: c.municipality, villages
 </div>
 </section>
 
-<section class="sec-b">
+<section class="sec-b" data-mg data-stagger="45">
 <div class="wrap split" style="gap:32px 80px">
-<h2 class="h2 h2-m" style="max-width:12em">Kur priimamos užklausos</h2>
-<div class="pills">${c.areas.map((a) => `<span class="pill" style="color:var(--forest)">${a}</span>`).join('')}</div>
+<h2 class="h2 h2-m" style="max-width:12em" data-m="up">Kur priimamos užklausos</h2>
+<div class="pills" data-story="lightup">${c.areas.map((a) => `<span class="pill" style="color:var(--forest)" data-m="up">${a}</span>`).join('')}</div>
 </div>
 </section>
 
-<section class="sec-b">
+<section class="sec-b" data-mg>
 <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:24px">
-<div class="panel stack">
+<div class="panel stack" data-m="card">
 <h2 class="h2 h2-s">Prieš lyginant sklypą ${c.gen} rajone</h2>
 <p class="muted" style="line-height:1.65">${c.local}</p>
 <ol class="stepper">
@@ -70,15 +70,15 @@ ${shortForm({ source: c.slug, dark: true, municipality: c.municipality, villages
 <li class="now"><span class="dot">3</span>Įvertinkite privažiavimą: vartų plotį, dangas, medžius.</li>
 </ol>
 </div>
-<div class="panel stack" style="gap:8px">
+<div class="panel stack" style="gap:8px" data-m="card">
 <h2 class="h2 h2-s" style="margin-bottom:12px">Klausimai apie ${c.name === 'Vilnius' ? 'Vilnių' : 'Kauną'}</h2>
 ${faq(QA, 'compact')}
 </div>
 </div>
 </section>
 
-<section class="sec-b">
-<div class="wrap stack">
+<section class="sec-b" data-mg>
+<div class="wrap stack" data-m="up">
 <h2 style="font-size:22px;font-weight:650">Taip pat skaitykite</h2>
 <div class="pills"><a href="/paslaugos/#s2" class="pill">Paruošimas vejai</a><a href="/paslaugos/#s3" class="pill">Nuolydžiai ir balos</a><a href="/paslaugos/#s5" class="pill">Juodžemio kiekis</a><a href="/kaina/" class="pill">Kainų skaičiuoklė</a>${CITIES.filter((x) => x.slug !== c.slug).map((x) => `<a href="/${x.slug}/" class="pill">Sklypo lyginimas ${x.loc}</a>`).join('')}</div>
 </div>

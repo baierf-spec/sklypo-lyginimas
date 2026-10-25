@@ -5,11 +5,11 @@ export default {
   title: 'Privatumo politika | sklypolyginimas.lt',
   description: 'Kaip sklypolyginimas.lt tvarko užklausose pateiktus asmens duomenis.',
   body: `
-<section style="padding:40px 0 var(--sec)">
+<section style="padding:40px 0 var(--sec)" data-mg data-stagger="90">
 <div class="wrap stack" style="gap:36px">
 ${crumbs([{ name: 'Pradžia', path: '/' }, { name: 'Privatumo politika', path: '/privatumo-politika/' }])}
-<h1 class="disp" style="font-size:clamp(40px,5vw,72px)">Privatumo politika</h1>
-<div class="prose">
+<h1 class="disp" style="font-size:clamp(40px,5vw,72px)" data-m="up">Privatumo politika</h1>
+<div class="prose" data-m="up">
 <p>Ši politika paaiškina, kaip svetainė sklypolyginimas.lt tvarko asmens duomenis, kuriuos pateikiate užklausos formoje. Duomenų valdytojas: [įmonės pavadinimas, įmonės kodas, adresas, el. paštas].</p>
 <h2>Kokius duomenis renkame</h2>
 <p>Vardą, telefono numerį, el. pašto adresą (jei nurodote), sklypo vietą, plotą, aprašymą ir nuotraukas, jei jas pridedate. Techniniais tikslais taip pat fiksuojamas užklausos laikas ir puslapis, iš kurio ji pateikta.</p>

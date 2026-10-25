@@ -5,76 +5,27 @@
   var fmt = function (n) { return Math.round(n).toLocaleString('lt-LT'); };
   var r10 = function (n) { return fmt(Math.round(n / 10) * 10); };
 
-  /* ---------- Before / after slider ---------- */
-  document.querySelectorAll('[data-slider]').forEach(function (fig) {
-    var input = fig.querySelector('.scrub');
-    var clip = fig.querySelector('[data-clip]');
-    var line = fig.querySelector('[data-handle-line]');
-    var handle = fig.querySelector('[data-handle]');
-    var set = function (pos) {
-      var x = Math.round(pos * 12);
-      clip.setAttribute('x', x);
-      line.setAttribute('x1', x); line.setAttribute('x2', x);
-      handle.setAttribute('transform', 'translate(' + x + ' 230)');
-    };
-    var stopped = false;
-    var touch = function () { stopped = true; fig.classList.add('touched'); };
-    input.addEventListener('input', function () { touch(); set(+input.value); });
-
-    // Drag or tap anywhere on the picture (mouse, pen and touch)
-    var dragging = false, startX = 0, startY = 0, decided = false;
-    var posFromEvent = function (e) {
-      var r = fig.getBoundingClientRect();
-      var p = ((e.clientX - r.left) / r.width) * 100;
-      return Math.max(2, Math.min(98, p));
-    };
-    var apply = function (e) { var p = posFromEvent(e); set(p); input.value = Math.round(p); };
-    fig.addEventListener('pointerdown', function (e) {
-      if (e.button !== undefined && e.button !== 0) return;
-      dragging = true; decided = e.pointerType !== 'touch'; startX = e.clientX; startY = e.clientY;
-      touch();
-      if (decided) { fig.setPointerCapture(e.pointerId); fig.classList.add('dragging'); apply(e); }
-    });
-    fig.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      if (!decided) {
-        // on touch: horizontal swipe drags the slider, vertical swipe scrolls the page
-        var dx = Math.abs(e.clientX - startX), dy = Math.abs(e.clientY - startY);
-        if (dx < 6 && dy < 6) return;
-        if (dy > dx) { dragging = false; return; }
-        decided = true; fig.setPointerCapture(e.pointerId); fig.classList.add('dragging');
-      }
-      e.preventDefault(); apply(e);
-    });
-    var end = function (e) {
-      if (dragging && !decided && e.type === 'pointerup') apply(e); // simple tap
-      dragging = false; fig.classList.remove('dragging');
-    };
-    fig.addEventListener('pointerup', end);
-    fig.addEventListener('pointercancel', end);
-    if (reduce) { input.value = 50; set(50); return; }
-    var from = 90, to = 50, dur = 1700, delay = 700, start = null;
-    var ease = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
-    var step = function (ts) {
-      if (stopped) return;
-      if (start === null) start = ts;
-      var t = Math.min(1, Math.max(0, (ts - start - delay) / dur));
-      var p = from + (to - from) * ease(t);
-      set(p); input.value = Math.round(p);
-      if (t < 1) requestAnimationFrame(step);
-    };
-    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (e) {
-      if (e[0].isIntersecting) { io.disconnect(); requestAnimationFrame(step); }
-    }) : null;
-    if (io) io.observe(fig); else requestAnimationFrame(step);
-  });
-
   /* ---------- Calculator ---------- */
   document.querySelectorAll('[data-calc]').forEach(function (root) {
     var st = { area: 12, cond: 'mid', mach: 'bobcat', mill: true, stones: false, soil: false, depth: 15 };
     var HPA = { flat: 0.3, mid: 0.5, rough: 0.9 };
     var MACH = { bobcat: { min: 30, max: 45, speed: 1 }, dozer: { min: 50, max: 70, speed: 0.5 } };
     var $ = function (s) { return root.querySelector(s); };
+    var shown = null, raf = 0;
+    var totalEl = $('[data-total]');
+    var tweenTotal = function (lo, hi) {
+      var reduce2 = !document.documentElement.classList.contains('m');
+      if (!shown || reduce2) { shown = [lo, hi]; totalEl.textContent = fmt(lo) + '–' + fmt(hi) + ' €'; return; }
+      var from = shown.slice(), t0 = performance.now(), dur = 450;
+      cancelAnimationFrame(raf);
+      var step = function (ts) {
+        var k = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        shown = [from[0] + (lo - from[0]) * e, from[1] + (hi - from[1]) * e];
+        totalEl.textContent = fmt(shown[0]) + '–' + fmt(shown[1]) + ' €';
+        if (k < 1) raf = requestAnimationFrame(step); else shown = [lo, hi];
+      };
+      raf = requestAnimationFrame(step);
+    };
     var render = function () {
       var m = MACH[st.mach];
       var h = st.area * HPA[st.cond] * m.speed + (st.mill ? st.area * 0.15 : 0) + (st.stones ? st.area * 0.1 : 0);
@@ -85,7 +36,7 @@
       var m3 = Math.round(st.area * st.depth);
       if (st.soil) add('Juodžemis, ' + m3 + ' m³', m3 * 3, m3 * 16);
       add('Technikos atvežimas', 30, 80);
-      $('[data-total]').textContent = r10(lo) + '–' + r10(hi) + ' €';
+      tweenTotal(Math.round(lo / 10) * 10, Math.round(hi / 10) * 10);
       $('[data-hours]').textContent = 'apie ' + (Math.round(hLo * 10) / 10).toLocaleString('lt-LT') + '–' + (Math.round(hHi * 10) / 10).toLocaleString('lt-LT') + ' val. technikos darbo';
       $('[data-lines]').innerHTML = lines.map(function (l) { return '<div><span>' + l[0] + '</span><span>' + l[1] + '</span></div>'; }).join('');
       $('[data-area-out]').textContent = st.area + ' a';
