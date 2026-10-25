@@ -156,7 +156,7 @@
     /* multistep */
     var steps = Array.prototype.slice.call(box.querySelectorAll('[data-step]'));
     var cur = 0;
-    var stepper = document.querySelector('[data-stepper]');
+    var stepper = box.querySelector('[data-stepper]') || (box.hasAttribute('data-multistep') ? document.querySelector('[data-stepper]') : null);
     var nav = {
       back: box.querySelector('[data-back]'), next: box.querySelector('[data-next]'),
       submit: box.querySelector('[data-submit]'), hint: box.querySelector('[data-hint]'),
@@ -170,8 +170,10 @@
       if (nav.submit) nav.submit.hidden = i !== steps.length - 1;
       if (stepper) stepper.querySelectorAll('li').forEach(function (li, k) { li.className = k === i ? 'now' : k < i ? 'ok' : ''; if (k === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
       hideErr();
-      var h = steps[i].querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
-      box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      var h = steps[i].querySelector('h2');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+      else { var f1 = steps[i].querySelector('input:not([type=hidden]):not([type=radio]):not([type=checkbox]),select,textarea'); if (f1 && window.matchMedia('(pointer:fine)').matches) f1.focus({ preventScroll: true }); }
+      if (box.getBoundingClientRect().top < 0) box.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
     };
     if (steps.length) {
       nav.next.addEventListener('click', function () {

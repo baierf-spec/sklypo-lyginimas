@@ -31,7 +31,7 @@ export default {
 <label class="lbl">Savivaldybė<select class="f" name="savivaldybe" required>${munOptions()}</select></label>
 <label class="lbl">Gyvenvietė<input class="f" type="text" name="vieta" placeholder="Pavyzdžiui, Riešė" maxlength="80"></label>
 </div>
-<label class="lbl" style="max-width:260px">Plotas arais<input class="f tnum" type="number" name="arai" min="1" max="100000" inputmode="numeric" placeholder="12"></label>
+<label class="lbl" style="max-width:260px"><span>Plotas arais <span class="hint">apytiksliai</span></span><input class="f tnum" type="number" name="arai" min="1" max="100000" inputmode="numeric" placeholder="Pvz., 12" required></label>
 <fieldset style="border:0;margin:0;padding:0"><legend style="font-size:15px;font-weight:600;margin-bottom:12px">Kokia žemė dabar?</legend>
 <div class="grid2" style="gap:10px">
 <label class="pick"><input type="radio" name="bukle" value="Beveik lygi">Beveik lygi</label>
@@ -53,7 +53,7 @@ export default {
 <label class="pick"><input type="checkbox" name="darbai" value="Krūmai, kelmai, atliekos">Krūmai, kelmai, atliekos</label>
 </div></fieldset>
 <div class="stack" style="gap:8px"><span style="font-size:15px;font-weight:600">Sklypo nuotraukos</span>${photoDrop()}</div>
-<label class="lbl">Kas dar svarbu? <span class="hint">Siauri vartai, trinkelės, medžiai ir pan.</span><textarea class="f" name="pastabos" rows="3" maxlength="2000"></textarea></label>
+<label class="lbl"><span>Aprašykite situaciją <span class="hint">Kas yra dabar, ko norite, kas gali trukdyti technikai</span></span><textarea class="f" name="pastabos" rows="4" maxlength="2000" placeholder="Pvz., po namo statybos liko grunto krūvos, reikia nuolydžio nuo pamatų ir vejos. Įvažiavimas per 3 m vartus, šalia trinkelės."></textarea></label>
 </div>
 
 <div class="step" data-step="3" hidden>
@@ -65,7 +65,7 @@ export default {
 <label class="pick"><input type="radio" name="savininkas" value="Statytojas ar rangovas">Statytojas ar rangovas</label>
 <label class="pick"><input type="radio" name="savininkas" value="Kita">Kita</label>
 </div></fieldset>
-<label class="lbl">Numatomas biudžetas <span class="hint">Nebūtina</span><select class="f tnum" name="biudzetas"><option>Dar nežinau</option><option>iki 500 €</option><option>500–1 500 €</option><option>1 500–5 000 €</option><option>daugiau nei 5 000 €</option></select></label>
+<label class="lbl"><span>Numatomas biudžetas <span class="hint">Nebūtina</span></span><select class="f tnum" name="biudzetas"><option>Dar nežinau</option><option>iki 500 €</option><option>500–1 500 €</option><option>1 500–5 000 €</option><option>daugiau nei 5 000 €</option></select></label>
 </div>
 
 <div class="step" data-step="4" hidden>
@@ -75,7 +75,7 @@ export default {
 <label class="lbl">Telefono numeris<input class="f" type="tel" name="tel" autocomplete="tel" placeholder="+370" required maxlength="30"></label>
 </div>
 <div class="grid2">
-<label class="lbl">El. paštas <span class="hint">Sąmatai atsiųsti, nebūtina</span><input class="f" type="email" name="email" autocomplete="email" maxlength="120"></label>
+<label class="lbl"><span>El. paštas <span class="hint">Sąmatai atsiųsti, nebūtina</span></span><input class="f" type="email" name="email" autocomplete="email" maxlength="120"></label>
 <label class="lbl">Kada patogu kalbėti?<select class="f" name="laikas"><option>Bet kada</option><option>8–12 val.</option><option>12–17 val.</option><option>Po 17 val.</option></select></label>
 </div>
 ${consent()}

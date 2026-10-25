@@ -53,7 +53,7 @@ const munOptions = (placeholder = true) => (placeholder ? '<option value="">Pasi
 
 export const consent = () => `<label class="check"><input type="checkbox" name="sutikimas" value="taip" required><span>Sutinku, kad mano duomenys būtų naudojami šiai užklausai pagal <a href="/privatumo-politika/">privatumo politiką</a>.</span></label>`;
 
-/** Short lead form (4 fields + photos). */
+/** Short lead form: 2 steps (plot + situation, contacts). */
 export const shortForm = ({ source, dark = false, municipality, villages } = {}) => {
   const place = villages
     ? `<label class="lbl">Vietovė<select class="f" name="vieta">${villages.map((v) => `<option>${v}</option>`).join('')}</select></label>`
@@ -64,19 +64,37 @@ export const shortForm = ({ source, dark = false, municipality, villages } = {})
 <input type="hidden" name="saltinis" value="${esc(source)}">
 ${municipality ? `<input type="hidden" name="savivaldybe" value="${esc(municipality)}">` : ''}
 <div class="hp" aria-hidden="true"><label>Svetainė<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<ol class="fsteps" data-stepper aria-label="Užklausos žingsniai"><li class="now" aria-current="step"><span class="dot">1</span>Sklypas</li><li><span class="dot">2</span>Kontaktai</li></ol>
+<div class="step" data-step="1">
 <div class="grid2">
 ${place}
-<label class="lbl">Plotas arais<input class="f tnum" type="number" name="arai" min="1" max="100000" inputmode="numeric" placeholder="12"></label>
+<label class="lbl"><span>Plotas arais <span class="hint">apytiksliai</span></span><input class="f tnum" type="number" name="arai" min="1" max="100000" inputmode="numeric" placeholder="Pvz., 12" required></label>
 </div>
+<fieldset class="fs"><legend>Kokia situacija dabar?</legend>
+<div class="picks">
+<label class="pick pick-sm"><input type="radio" name="bukle" value="Kauburiai, duobės">Kauburiai, duobės</label>
+<label class="pick pick-sm"><input type="radio" name="bukle" value="Po statybų">Po statybų</label>
+<label class="pick pick-sm"><input type="radio" name="bukle" value="Telkšo vanduo">Telkšo vanduo</label>
+<label class="pick pick-sm"><input type="radio" name="bukle" value="Reikia vejos">Reikia vejos</label>
+</div></fieldset>
+<label class="lbl"><span>Aprašykite situaciją <span class="hint">Nebūtina</span></span><textarea class="f" name="pastabos" rows="3" maxlength="2000" placeholder="Pvz., po namo statybos liko grunto krūvos, reikia nuolydžio nuo pamatų ir vejos. Įvažiavimas per 3 m vartus."></textarea></label>
+${photoDrop({ dark })}
+</div>
+<div class="step" data-step="2" hidden>
 <div class="grid2">
 <label class="lbl">Vardas<input class="f" type="text" name="vardas" autocomplete="given-name" required maxlength="80"></label>
 <label class="lbl">Telefono numeris<input class="f" type="tel" name="tel" autocomplete="tel" placeholder="+370" required maxlength="30"></label>
 </div>
-${photoDrop({ dark })}
+<label class="lbl"><span>El. paštas <span class="hint">Sąmatai atsiųsti, nebūtina</span></span><input class="f" type="email" name="email" autocomplete="email" maxlength="120"></label>
 ${consent()}
 ${turnstile()}
+</div>
 <p class="form-err" role="alert" data-err></p>
-<button type="submit" class="btn btn-block"${dark ? ' style="background:#F8FAF6;color:#16291C"' : ''}>Gauti pasiūlymą</button>
+<div class="step-nav tight">
+<button type="button" class="btn-o back" data-back hidden aria-label="Atgal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+<button type="button" class="btn grow" data-next>Toliau</button>
+<button type="submit" class="btn grow" data-submit hidden>Gauti pasiūlymą</button>
+</div>
 </form>
 <div class="done" role="status" tabindex="-1">
 ${doneIcon}

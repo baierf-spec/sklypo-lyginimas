@@ -316,3 +316,43 @@ svg .sx{transform-box:fill-box;transform-origin:center}
   .lead-card .lc-time{font-size:12px}
 }
 @media (prefers-reduced-motion:reduce){.hl{display:none}}
+
+/* Short 2-step lead form */
+.fsteps{margin:0 0 4px;padding:0;list-style:none;display:flex;gap:8px}
+.fsteps li{flex:1;display:flex;align-items:center;gap:10px;padding:0 0 12px;font-size:15px;font-weight:600;color:var(--muted-2);border-bottom:3px solid var(--line-2);transition:color .2s,border-color .2s}
+.fsteps .dot{width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1.5px var(--line);flex:none}
+.fsteps li.now{color:var(--forest);border-color:var(--moss)}
+.fsteps li.now .dot{background:var(--forest);color:var(--mist);box-shadow:none}
+.fsteps li.ok{color:var(--moss);border-color:var(--fern)}
+.fsteps li.ok .dot{background:var(--fern-pale);color:var(--moss);box-shadow:none}
+.fs{border:0;margin:0;padding:0;min-width:0}
+.fs legend{font-size:15px;font-weight:600;margin-bottom:10px;padding:0}
+.picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.pick-sm{min-height:48px;padding:10px 14px;font-size:15px;gap:10px;line-height:1.25}
+.pick-sm input{width:18px;height:18px}
+.step-nav.tight{margin-top:0;padding-top:0;border-top:0;flex-wrap:nowrap}
+.step-nav .grow{flex:1 1 auto;min-height:56px}
+.step-nav .grow[hidden],.step-nav [hidden]{display:none}
+[data-lead]:not([data-multistep]) .step{gap:18px}
+.dark-form .fsteps li{color:var(--on-dark-2);border-color:#3A5242}
+.dark-form .fsteps .dot{box-shadow:inset 0 0 0 1.5px #4A6150}
+.dark-form .fsteps li.now{color:#F8FAF6;border-color:var(--fern)}
+.dark-form .fsteps li.now .dot{background:var(--fern);color:var(--forest)}
+.dark-form .fsteps li.ok{color:var(--on-dark);border-color:#5E7F64}
+.dark-form .fsteps li.ok .dot{background:#2E4A36;color:#D3E6D1}
+.dark-form .pick{background:#1E3526;box-shadow:inset 0 0 0 1.5px #4A6150;color:#EEF2EC}
+.dark-form .pick:hover{box-shadow:inset 0 0 0 1.5px var(--fern)}
+.dark-form .pick:has(input:checked){background:#2E4A36;box-shadow:inset 0 0 0 2px var(--fern)}
+.dark-form .pick input{accent-color:var(--fern)}
+.dark-form .btn{background:#F8FAF6;color:#16291C}
+.dark-form .btn:hover{background:#D3E6D1;color:#16291C}
+.dark-form .btn-o{color:#F8FAF6;box-shadow:inset 0 0 0 1.5px #8DA690}
+.dark-form .btn-o:hover{background:#F8FAF6;color:#16291C}
+.dark-form .hint{color:var(--on-dark-2)}
+@media (max-width:380px){.picks{grid-template-columns:1fr}}
+.picks{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+.step-nav .back{width:56px;min-height:56px;padding:0;flex:none}
+.step-nav .grow{white-space:nowrap;padding:0 20px}
+.form{container-type:inline-size}
+.picks{grid-template-columns:repeat(2,minmax(0,1fr))}
+@container (max-width:320px){.picks{grid-template-columns:1fr}}

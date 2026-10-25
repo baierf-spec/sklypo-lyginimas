@@ -223,7 +223,7 @@ ${price('Juodžemis, smėlis, žvyras', 3, 16, 'm³')}
 <div class="panel-dark split" style="gap:48px 72px" data-m="card">
 <div class="stack">
 <h2 class="h2 h2-l" data-m="up">Sužinokite, kiek kainuos jūsų sklypas</h2>
-<p style="font-size:18px;line-height:1.6;color:var(--on-dark);max-width:26em" data-m="up">Užpildykite keturis laukus – paskambinsime ir suderinsime nemokamą matavimą. Daugiau detalių galite pridėti <a href="/uzklausa/">išsamioje užklausoje</a>.</p>
+<p style="font-size:18px;line-height:1.6;color:var(--on-dark);max-width:26em" data-m="up">Du trumpi žingsniai: apie sklypą ir kontaktai. Paskambinsime ir suderinsime nemokamą matavimą. Daugiau detalių galite pridėti <a href="/uzklausa/">išsamioje užklausoje</a>.</p>
 </div>
 <div style="background:var(--paper);color:var(--forest);border-radius:var(--r-lg);padding:clamp(24px,3.4vw,40px)" data-m="up">
 ${shortForm({ source: 'pagrindinis' })}
