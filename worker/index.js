@@ -168,19 +168,23 @@ ${attachments.length ? `<p style="margin:16px 0 0;font-size:14px;color:#4C5A4F">
   if (data.email) message.replyTo = data.vardas ? { email: data.email, name: data.vardas } : data.email;
   if (attachments.length) message.attachments = attachments;
 
-  try {
-    await env.EMAIL.send(message);
-  } catch (e) {
-    // Retry once without attachments so the lead is never lost
-    console.error('email send failed', e.code, e.message);
-    if (attachments.length) {
-      delete message.attachments;
-      message.text += '\n\n(Nuotraukų nepavyko prisegti – susisiekite su klientu.)';
-      await env.EMAIL.send(message);
-    } else {
-      throw e;
+  // Delivery with fallbacks so a lead is never lost:
+  // 1) EMAIL_FROM  2) EMAIL_FROM_FALLBACK (another onboarded domain)  3) without attachments
+  const senders = [env.EMAIL_FROM, env.EMAIL_FROM_FALLBACK].filter(Boolean);
+  let sent = false, lastErr;
+  for (const from of senders) {
+    message.from = { email: from, name: 'sklypolyginimas.lt' };
+    try { await env.EMAIL.send(message); sent = true; break; } catch (e) { lastErr = e; console.error('email send failed', from, e.code, e.message); }
+  }
+  if (!sent && attachments.length) {
+    delete message.attachments;
+    message.text += '\n\n(Nuotraukų nepavyko prisegti – susisiekite su klientu.)';
+    for (const from of senders) {
+      message.from = { email: from, name: 'sklypolyginimas.lt' };
+      try { await env.EMAIL.send(message); sent = true; break; } catch (e) { lastErr = e; }
     }
   }
+  if (!sent) throw lastErr || new Error('email not sent');
 
   return json({ ok: true, id });
 }

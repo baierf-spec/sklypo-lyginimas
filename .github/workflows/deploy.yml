@@ -21,7 +21,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+          TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY || '0x4AAAAAAFljSi-oxU4KlJqh' }}
       - name: Apply D1 migrations
         run: npx wrangler d1 migrations apply sklypolyginimas-leads --remote
         env:

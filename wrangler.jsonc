@@ -29,23 +29,21 @@
     }
   ],
 
-  // Uncomment once sklypolyginimas.lt is active on Cloudflare (nameservers changed)
-  // "routes": [
-  //   { "pattern": "sklypolyginimas.lt", "custom_domain": true },
-  //   { "pattern": "www.sklypolyginimas.lt", "custom_domain": true }
-  // ],
+  // Custom domains sklypolyginimas.lt and www.sklypolyginimas.lt are attached in the dashboard / API
+  // (Workers → sklypolyginimas → Domains & Routes), so deploys don't need zone permissions.
 
   "vars": {
     "ADMIN_EMAIL": "marek.cernevic@gmail.com",
-    // Must be on a domain onboarded to Email Sending. Switch to uzklausa@sklypolyginimas.lt once that domain is onboarded.
-    "EMAIL_FROM": "uzklausa@drenazoirengimas.lt",
+    // Sender must be on a domain onboarded to Email Sending; the fallback is used automatically if the first one fails
+    "EMAIL_FROM": "uzklausa@sklypolyginimas.lt",
+    "EMAIL_FROM_FALLBACK": "uzklausa@drenazoirengimas.lt",
     "SITE_ORIGIN": "https://sklypolyginimas.lt",
     "ALLOWED_ORIGINS": "https://sklypolyginimas.lt,https://www.sklypolyginimas.lt,https://sklypolyginimas.baier-f.workers.dev",
     "LEADS_ENABLED": "true",
-    // Set to "true" when the site goes live on its own domain (robots.txt + noindex header)
-    "SEO_INDEXABLE": "false"
+    // robots.txt + noindex header (workers.dev is always noindex)
+    "SEO_INDEXABLE": "true"
   },
 
   "observability": { "enabled": true }
-  // Secret (optional): TURNSTILE_SECRET_KEY  →  npx wrangler secret put TURNSTILE_SECRET_KEY
+  // Secret: TURNSTILE_SECRET_KEY (set). Public site key: GitHub Actions variable TURNSTILE_SITE_KEY
 }

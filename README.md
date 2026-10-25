@@ -42,13 +42,13 @@ npm run deploy    # build + D1 migracijos + wrangler deploy
 
 Pasirenkami: `TURNSTILE_SECRET_KEY` (secret) ir `TURNSTILE_SITE_KEY` (GitHub Actions kintamasis build metu).
 
-## Paleidimo žingsniai
+## Cloudflare būsena
 
-1. **Nameserveriai.** Pas domeno registratorių `sklypolyginimas.lt` nameserverius pakeiskite į `ram.ns.cloudflare.com` ir `zita.ns.cloudflare.com`.
-2. **Email Sending.** Kai zona aktyvi: Cloudflare → Email Service → Email Sending → Onboard Domain → `sklypolyginimas.lt`. Tada `EMAIL_FROM` pakeiskite į `uzklausa@sklypolyginimas.lt`.
-3. **Domenas Worker'iui.** `wrangler.jsonc` atkomentuokite `routes` blokelį.
-4. **Indeksavimas.** `SEO_INDEXABLE` → `"true"`, tada Google Search Console pateikite `/sitemap.xml`.
-5. **Automatinis deploy.** GitHub → Settings → Secrets → `CLOUDFLARE_API_TOKEN` (šablonas „Edit Cloudflare Workers“ + D1 Edit). Kiekvienas push į `main` paleidžia `.github/workflows/deploy.yml`.
+- Zona `sklypolyginimas.lt` aktyvi, Worker'is pririštas prie `sklypolyginimas.lt` ir `www.sklypolyginimas.lt` (www → apex 301).
+- Email Routing: `uzklausa@` ir `info@sklypolyginimas.lt` peradresuojami į `ADMIN_EMAIL`.
+- Turnstile: widget'as „sklypolyginimas“, slaptas raktas Worker'io secret `TURNSTILE_SECRET_KEY`, viešas raktas build metu (`TURNSTILE_SITE_KEY`).
+- Email Sending: siuntėjas `uzklausa@sklypolyginimas.lt`; jei domenas dar neįjungtas Email Sending, automatiškai naudojamas `EMAIL_FROM_FALLBACK`.
+- `SEO_INDEXABLE=true`: robots.txt leidžia indeksuoti, sitemap `/sitemap.xml`.
 
 ## Užklausų peržiūra
 
