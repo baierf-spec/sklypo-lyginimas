@@ -17,7 +17,9 @@ ${crumbs([{ name: 'Pradžia', path: '/' }, { name: 'Privatumo politika', path: '
 <h2>Kam naudojame duomenis</h2>
 <p>Tik tam, kad galėtume su jumis susisiekti, išmatuoti sklypą ir pateikti pasiūlymą. Jei darbus jūsų regione atlieka mūsų partneris, užklausa perduodama jam. Teisinis pagrindas – jūsų sutikimas, kurį pažymite pateikdami formą.</p>
 <h2>Kam perduodame</h2>
-<p>Užklausos duomenis gali gauti mūsų partneris, atliekantis darbus jūsų regione. Duomenų neparduodame reklamos tikslais ir neperduodame kitiems tretiesiems asmenims, išskyrus paslaugų teikėjus, užtikrinančius svetainės veikimą (talpinimas ir el. pašto siuntimas – Cloudflare, Inc.).</p>
+<p>Užklausos duomenis gali gauti mūsų partneris, atliekantis darbus jūsų regione. Duomenų neparduodame reklamos tikslais ir neperduodame kitiems tretiesiems asmenims, išskyrus paslaugų teikėjus, užtikrinančius svetainės veikimą (talpinimas ir el. pašto siuntimas – Cloudflare, Inc.; lankomumo statistika – Google Ireland Ltd.).</p>
+<h2>Slapukai ir lankomumo statistika</h2>
+<p>Svetainės lankomumui matuoti naudojame Google Analytics (Google Ireland Ltd.). Ši paslauga naudoja slapukus ir renka nuasmenintą informaciją apie apsilankymus: kuriuos puslapius peržiūrėjote, iš kur atėjote, kokį įrenginį naudojate, ir ar pateikėte užklausą. Užklausos turinys (vardas, telefonas ir kiti formos duomenys) į Google Analytics neperduodamas. Slapukus galite ištrinti ar užblokuoti savo naršyklės nustatymuose.</p>
 <h2>Kiek laiko saugome</h2>
 <p>Užklausų duomenis saugome ne ilgiau kaip 24 mėnesius, po to jie ištrinami.</p>
 <h2>Jūsų teisės</h2>

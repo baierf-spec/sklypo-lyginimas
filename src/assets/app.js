@@ -210,7 +210,14 @@
           box.classList.add('is-sent');
           if (stepper) stepper.querySelectorAll('li').forEach(function (li) { li.className = 'ok'; });
           var d = box.querySelector('.done'); if (d) d.focus();
-          if (window.dataLayer) window.dataLayer.push({ event: 'lead_submit', form: endpoint });
+          if (endpoint === '/api/lead' && typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', {
+              form_name: 'kontaktinė_forma',
+              lead_type: 'užklausa',
+              form_location: String(fd.get('saltinis') || ''),
+              photos: photos.get().length,
+            });
+          }
         })
         .catch(function (x) {
           showErr(x && x.message && x.message !== 'server' && x.message.length < 160 ? x.message : (navigator.onLine === false ? TXT.network : TXT.server));
