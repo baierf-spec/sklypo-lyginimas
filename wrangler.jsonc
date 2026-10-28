@@ -41,7 +41,8 @@
     "ALLOWED_ORIGINS": "https://sklypolyginimas.lt,https://www.sklypolyginimas.lt,https://sklypolyginimas.baier-f.workers.dev",
     "LEADS_ENABLED": "true",
     // robots.txt + noindex header (workers.dev is always noindex)
-    "SEO_INDEXABLE": "true"
+    "SEO_INDEXABLE": "true",
+    "GA_MEASUREMENT_ID": "G-TDK1DCZ6MP"
   },
 
   "observability": { "enabled": true }

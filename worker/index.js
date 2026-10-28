@@ -193,7 +193,35 @@ async function handleForm(request, env, ctx, kind) {
   }
   if (!sent) throw lastErr || new Error('email not sent');
 
-  return json({ ok: true, id });
+  // Count the lead in GA4 from the server (Measurement Protocol): works with ad blockers
+  // and without cookies. No personal data is sent to Google.
+  let tracked = false;
+  if (kind === 'lead' && env.GA_API_SECRET && env.GA_MEASUREMENT_ID) {
+    const cid = /^\d+\.\d+$/.test(clean(form.get('ga_cid'), 40)) ? clean(form.get('ga_cid'), 40) : `${Math.floor(Math.random() * 2147483647)}.${Math.floor(Date.now() / 1000)}`;
+    const sid = /^\d{6,20}$/.test(clean(form.get('ga_sid'), 20)) ? clean(form.get('ga_sid'), 20) : '';
+    tracked = await sendGa(env, cid, {
+      name: 'generate_lead',
+      params: {
+        form_name: 'kontaktinė_forma', lead_type: 'užklausa',
+        form_location: data.saltinis || '', page_path: data.puslapis || '/',
+        photos: attachments.length, ...(sid && { session_id: sid }), engagement_time_msec: 1,
+        tracking: form.get('ga_cid') ? 'server_cookie' : 'server_no_cookie',
+      },
+    });
+  }
+
+  return json({ ok: true, id, tracked });
+}
+
+async function sendGa(env, clientId, event) {
+  try {
+    const r = await fetch(`https://www.google-analytics.com/mp/collect?measurement_id=${encodeURIComponent(env.GA_MEASUREMENT_ID)}&api_secret=${encodeURIComponent(env.GA_API_SECRET)}`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ client_id: clientId, events: [event] }),
+      signal: AbortSignal.timeout(3000),
+    });
+    return r.ok;
+  } catch (e) { console.error('ga mp', e.message); return false; }
 }
 
 async function verifyTurnstile(secret, token, ip) {

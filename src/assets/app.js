@@ -200,6 +200,9 @@
       photos.get().forEach(function (p) { fd.append('foto', p.blob, p.name); });
       fd.append('puslapis', location.pathname);
       var ref = document.referrer; if (ref) fd.append('referrer', ref);
+      var ck = document.cookie, cid = /(?:^|;\s*)_ga=GA\d\.\d\.(\d+\.\d+)/.exec(ck), sc = /(?:^|;\s*)_ga_TDK1DCZ6MP=([^;]+)/.exec(ck);
+      if (cid) fd.append('ga_cid', cid[1]);
+      var sid = sc && (/\$?s(\d{9,})/.exec(sc[1]) || /^GS1\.\d\.(\d{9,})/.exec(sc[1])); if (sid) fd.append('ga_sid', sid[1]);
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'gclid'].forEach(function (k) { var v = q.get(k); if (v) fd.append(k, v); });
       var btn = form.querySelector('[type="submit"]');
       btn.disabled = true; var old = btn.textContent; btn.textContent = 'Siunčiama…';
@@ -210,7 +213,7 @@
           box.classList.add('is-sent');
           if (stepper) stepper.querySelectorAll('li').forEach(function (li) { li.className = 'ok'; });
           var d = box.querySelector('.done'); if (d) d.focus();
-          if (endpoint === '/api/lead' && typeof window.gtag === 'function') {
+          if (endpoint === '/api/lead' && !res.j.tracked && typeof window.gtag === 'function') {
             window.gtag('event', 'generate_lead', {
               form_name: 'kontaktinė_forma',
               lead_type: 'užklausa',
