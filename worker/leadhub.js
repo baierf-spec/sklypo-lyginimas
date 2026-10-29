@@ -87,7 +87,7 @@ export async function leadhubEvent(env, kind, { hasPhotos = false, source = 'sit
 }
 
 /**
- * Sends an enquiry to the tenant while the site is rented, otherwise to the owner. When delivery
+ * Sends an enquiry to the tenant while the site is rented (and a copy to the owner), otherwise to the owner. When delivery
  * to the tenant fails, the owner gets it with a forwarding note, so no enquiry is lost.
  * `send(to, subjectPrefix)` must throw when the e-mail could not be sent.
  */
@@ -95,13 +95,19 @@ export async function deliverLead(env, ownerEmail, send) {
   const config = await leadhubConfig(env);
   const tenantEmail = config.tenant ? config.lead_email : null;
   if (!tenantEmail) return send(ownerEmail, '');
+  let sent;
   try {
-    return await send(tenantEmail, '');
+    sent = await send(tenantEmail, '');
   } catch (e) {
     console.error('Lead to tenant failed, sending to owner', e && e.message);
     if (!ownerEmail) throw e;
     return send(ownerEmail, `[Persiųsti: ${config.tenant.company_name || 'nuomininkui'} <${tenantEmail}>] `);
   }
+  // The site owner gets the same enquiry (to check it before counting it on the invoice).
+  if (ownerEmail && ownerEmail.toLowerCase() !== tenantEmail.toLowerCase()) {
+    await send(ownerEmail, `[Kopija: ${config.tenant.company_name || 'nuomininkui'}] `).catch((e) => console.error('Lead copy to owner failed', e && e.message));
+  }
+  return sent;
 }
 
 const json = (body, status = 200, extra = {}) =>
