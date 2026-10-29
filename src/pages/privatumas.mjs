@@ -26,7 +26,7 @@ ${crumbs([{ name: 'Pradžia', path: '/' }, { name: 'Privatumo politika', path: '
 <h2 id="slapukai">Slapukai ir lankomumo statistika</h2>
 <p>Lankomumui matuoti naudojame Google Analytics. Kol nepaspaudžiate „Sutinku“, Google Analytics veikia sutikimo režimu: slapukų nenaudoja ir gauna tik nuasmenintus signalus. Jums sutikus naudojami <code>_ga</code> ir <code>_ga_*</code> slapukai (iki 2 metų), kad matytume, kuriuos puslapius peržiūrite ir ar pateikiate užklausą. Formos turinys į Google Analytics neperduodamas. Pasirinkimą galite pakeisti bet kada – puslapio apačioje spauskite „Slapukų nustatymai“.</p>
 <h2>Kiek laiko saugome</h2>
-<p>Užklausas svetainės sistemoje saugome ne ilgiau kaip 24 mėnesius, po to jos ištrinamos. Paslaugų teikėjas gautas užklausas saugo pagal savo taisykles, tiek, kiek reikia atsakyti ir suteikti paslaugą.</p>
+<p>Svetainė užklausų nesaugo: jos iškart siunčiamos el. paštu paslaugų teikėjui ir svetainės valdytojui. Apsaugai nuo piktnaudžiavimo valandą saugoma tik IP adreso maišos reikšmė (be paties adreso). Paslaugų teikėjas gautas užklausas saugo pagal savo taisykles, tiek, kiek reikia atsakyti ir suteikti paslaugą.</p>
 <h2>Jūsų teisės</h2>
 <p>Galite prašyti susipažinti su savo duomenimis, juos ištaisyti ar ištrinti, apriboti tvarkymą, nesutikti su tvarkymu ir atšaukti sutikimą – parašykite svetainės valdytojui nurodytu el. paštu. Atšaukimas neturi įtakos iki tol atliktam tvarkymui. Skundą galite pateikti <a href="https://vdai.lrv.lt/" target="_blank" rel="noopener">Valstybinei duomenų apsaugos inspekcijai</a>.</p>
 </div>

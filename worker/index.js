@@ -25,10 +25,10 @@ const clean = (v, max = 500) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u0
 const isTrue = (v) => String(v).toLowerCase() === 'true';
 
 export default {
-  // Retention: stored enquiries are deleted after 24 months (as the privacy policy says).
+  // Enquiries are not stored (they go by e-mail). Clears old rate-limit rows.
   async scheduled(_event, env) {
     if (!env.DB) return;
-    await env.DB.prepare("DELETE FROM leads WHERE created_at < datetime('now', '-24 months')").run();
+    await env.DB.prepare("DELETE FROM submit_attempts WHERE at < datetime('now', '-1 hour')").run().catch(() => {});
   },
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -101,9 +101,12 @@ async function handleForm(request, env, ctx, kind) {
     if (!ok) return json({ ok: false, error: 'Nepavyko patvirtinti, kad esate ne robotas. Atnaujinkite puslapį ir bandykite dar kartą.' }, 400);
   }
 
-  // Simple rate limit per IP (needs D1)
+  // Simple rate limit per device (needs D1). Only a salted hash of the IP is kept, for one hour.
+  let ipHash = '';
   if (env.DB && ip) {
-    const row = await env.DB.prepare("SELECT COUNT(*) AS n FROM leads WHERE ip = ?1 AND created_at > datetime('now','-10 minutes')").bind(ip).first().catch(() => null);
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${env.TURNSTILE_SECRET_KEY || 'sklypai'}:${ip}`));
+    ipHash = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+    const row = await env.DB.prepare("SELECT COUNT(*) AS n FROM submit_attempts WHERE ip_hash = ?1 AND at > datetime('now','-10 minutes')").bind(ipHash).first().catch(() => null);
     if (row && row.n >= 5) return json({ ok: false, error: 'Per daug užklausų iš eilės. Pabandykite po kelių minučių.' }, 429);
   }
 
@@ -144,13 +147,9 @@ async function handleForm(request, env, ctx, kind) {
   const id = crypto.randomUUID();
   const created = new Date();
 
-  // Store (best effort, never blocks the e-mail)
-  if (env.DB) {
-    ctx.waitUntil(
-      env.DB.prepare('INSERT INTO leads (id, kind, data, photos, ip, country, user_agent) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)')
-        .bind(id, kind, JSON.stringify(data), attachments.length, ip, request.cf?.country || '', clean(request.headers.get('User-Agent'), 300))
-        .run().catch((e) => console.error('d1 insert', e.message)),
-    );
+  // The enquiry itself is not stored anywhere on the site: it only goes out by e-mail.
+  if (env.DB && ipHash) {
+    ctx.waitUntil(env.DB.prepare("INSERT INTO submit_attempts (ip_hash, at) VALUES (?1, datetime('now'))").bind(ipHash).run().catch(() => {}));
   }
 
   // E-mail to admin
