@@ -4,7 +4,7 @@
 //   POST /api/partner  → contractor   → e-mail to ADMIN_EMAIL and D1
 //   LeadHub: while the site is rented, client leads go to the tenant (see worker/leadhub.js)
 
-import { deliverLead, handleLeadhub, leadhubEvent } from './leadhub.js';
+import { deliverLead, handleLeadhub, leadhubEvent, leadSummary } from './leadhub.js';
 
 const MAX_PHOTOS = 6;
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
@@ -25,6 +25,11 @@ const clean = (v, max = 500) => String(v ?? '').replace(/[\u0000-\u0008\u000B\u0
 const isTrue = (v) => String(v).toLowerCase() === 'true';
 
 export default {
+  // Retention: stored enquiries are deleted after 24 months (as the privacy policy says).
+  async scheduled(_event, env) {
+    if (!env.DB) return;
+    await env.DB.prepare("DELETE FROM leads WHERE created_at < datetime('now', '-24 months')").run();
+  },
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
@@ -196,7 +201,10 @@ async function handleForm(request, env, ctx, kind) {
   // Client leads go to the LeadHub tenant while the site is rented; partner sign-ups always to the owner.
   if (kind === 'lead') {
     await deliverLead(env, env.ADMIN_EMAIL, sendTo);
-    ctx.waitUntil(leadhubEvent(env, 'form', { hasPhotos: attachments.length > 0 }));
+    const summary = leadSummary([
+      [data.vieta, data.savivaldybe].filter(Boolean).join(', '), data.arai && `${data.arai} a`, data.bukle, data.darbai, data.kada && `Kada: ${data.kada}`, data.pastabos,
+    ]);
+    ctx.waitUntil(leadhubEvent(env, 'form', { hasPhotos: attachments.length > 0, summary }));
   } else {
     await sendTo(env.ADMIN_EMAIL, '');
   }

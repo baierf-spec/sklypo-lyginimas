@@ -245,7 +245,39 @@
       var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href^="mailto:"]');
       if (a && a.closest('[data-lh-call],[data-lh-card],[data-lh-foot]')) track(a.getAttribute('href').indexOf('tel:') === 0 ? 'phone_click' : 'email_click');
     });
+    // Google Analytics cookies only with consent (consent mode default "denied" is set in the page head).
+    var ck = document.querySelector('[data-ck]');
+    var choice = null;
+    try { var saved = JSON.parse(localStorage.getItem('sl-consent') || 'null'); if (saved && Date.now() - saved.at < 180 * 864e5) choice = saved.v; } catch (e) {}
+    if (ck && !choice) ck.hidden = false;
+    document.querySelectorAll('[data-ck-v]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-ck-v');
+        try { localStorage.setItem('sl-consent', JSON.stringify({ v: v, at: Date.now() })); } catch (e) {}
+        if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: v });
+        if (v === 'denied') document.cookie.split(';').forEach(function (c) {
+          var n = c.trim().split('=')[0];
+          if (n === '_ga' || n.indexOf('_ga_') === 0) ['', location.hostname, '.' + location.hostname].forEach(function (d) { document.cookie = n + '=; Max-Age=0; path=/;' + (d ? ' domain=' + d + ';' : ''); });
+        });
+        if (ck) ck.hidden = true;
+      });
+    });
+    document.querySelectorAll('[data-ck-open]').forEach(function (b) { b.addEventListener('click', function () { if (ck) ck.hidden = false; }); });
+
+    // Privacy page: who runs the site and who currently receives enquiries.
+    var legalLoad = function (c) {
+      var o = c && c.operator, t = c && c.tenant;
+      if (o) document.querySelectorAll('[data-lh-operator]').forEach(function (el) {
+        el.innerHTML = esc([o.name, o.activity_cert ? 'individualios veiklos pažymos Nr. ' + o.activity_cert : '', o.vat_code ? 'PVM mokėtojo kodas ' + o.vat_code : '', o.address].filter(Boolean).join(', ')) + '.' +
+          (o.email ? ' El. paštas: <a href="mailto:' + esc(o.email) + '">' + esc(o.email) + '</a>.' : '');
+      });
+      if (t) document.querySelectorAll('[data-lh-provider]').forEach(function (el) {
+        el.textContent = 'Šiuo metu užklausas gauna ir paslaugas teikia ' + [t.company_name, t.company_code ? 'įm. k. ' + t.company_code : '', t.address].filter(Boolean).join(', ') + '.';
+        el.hidden = false;
+      });
+    };
     fetch('/api/leadhub/config', { credentials: 'omit' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (c) {
+      legalLoad(c);
       var t = c && c.tenant;
       if (!t) return;
       var phone = t.phone && t.phone.trim();

@@ -23,6 +23,9 @@
   // The matching secret is the Worker secret LEADHUB_SECRET.
   "services": [{ "binding": "LEADHUB", "service": "leadhub" }],
 
+  // Daily retention clean-up (worker scheduled handler)
+  "triggers": { "crons": ["17 3 * * *"] },
+
   // Lead storage
   "d1_databases": [
     {

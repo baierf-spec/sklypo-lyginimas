@@ -134,7 +134,7 @@ export const footer = () => `
 <a href="/" class="brand" aria-label="sklypolyginimas.lt">${logoMark(32)}<span class="brand-name">sklypolyginimas<span>.lt</span></span></a>
 <p class="small" style="font-size:15px;max-width:22em">Sklypų lyginimas, nuolydžiai ir paruošimas vejai visoje Lietuvoje. <span data-lh-legal>Užklausas perduodame patikrintiems rangovams.</span></p>
 </div>
-<nav aria-label="Puslapiai"><a href="/paslaugos/">Sklypo lyginimo paslaugos</a><a href="/kaina/">Kainos ir skaičiuoklė</a><a href="/uzklausa/">Užklausa</a><a href="/privatumo-politika/">Privatumo politika</a></nav>
+<nav aria-label="Puslapiai"><a href="/paslaugos/">Sklypo lyginimo paslaugos</a><a href="/kaina/">Kainos ir skaičiuoklė</a><a href="/uzklausa/">Užklausa</a><a href="/privatumo-politika/">Privatumo politika</a><button type="button" class="link-btn" data-ck-open>Slapukų nustatymai</button></nav>
 <nav aria-label="Miestai"><a href="/vilnius/">Sklypo lyginimas Vilniuje</a><a href="/kaunas/">Sklypo lyginimas Kaune</a></nav>
 <div class="stack" style="gap:12px;font-size:16px"><span class="ttl" style="font-weight:600">Užklausos</span><a href="/uzklausa/">Gauti pasiūlymą</a><span class="muted" style="font-size:15px">Matavimas nemokamas</span><div class="lh-foot stack" data-lh-foot hidden></div></div>
 </div>
@@ -163,6 +163,8 @@ export const layout = ({ path, title, description, body, schema = [], current, h
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  try { var c = JSON.parse(localStorage.getItem('sl-consent') || 'null'); if (c && c.v === 'granted' && Date.now() - c.at < 180 * 864e5) gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
   gtag('js', new Date());
   gtag('config', 'G-TDK1DCZ6MP');
 </script>
@@ -203,6 +205,7 @@ ${noindex || headOpts.minimal || headOpts.partner || path === '/privatumo-politi
 </main>
 ${footer()}
 <a class="lh-mbar" data-lh-call hidden href="/uzklausa/">${phoneIcon}<span>Skambinti <span data-lh-phone></span></span></a>
+<div class="ck" data-ck hidden role="region" aria-label="Slapukų pasirinkimas"><p>Lankomumo statistikai naudojame „Google Analytics“ slapukus, tik jei sutinkate. <a href="/privatumo-politika/#slapukai">Plačiau</a></p><div class="ck-act"><button type="button" class="btn-o btn-sm" data-ck-v="denied">Nesutinku</button><button type="button" class="btn btn-sm" data-ck-v="granted">Sutinku</button></div></div>
 <script src="/assets/motion.js?v=__V__" defer></script>
 <script src="/assets/app.js?v=__V__" defer></script>
 </body>
