@@ -21,6 +21,7 @@ export default {
 </div>
 
 <div class="panel" style="flex:999 1 560px;min-width:0" data-lead data-multistep data-m="card" data-d="150">
+<div class="lh-card" data-lh-card hidden></div>
 <form class="form" action="/api/lead" method="post" enctype="multipart/form-data" novalidate>
 <input type="hidden" name="saltinis" value="uzklausa">
 <div class="hp" aria-hidden="true"><label>Svetainė<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>

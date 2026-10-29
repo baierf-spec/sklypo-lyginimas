@@ -229,4 +229,57 @@
         });
     });
   });
+
+  /* ---------- LeadHub: tenant contacts and work photos (only while the site is rented) ---------- */
+  (function () {
+    var esc = function (v) { var d = document.createElement('div'); d.textContent = v == null ? '' : String(v); return d.innerHTML; };
+    var telHref = function (p) { return 'tel:' + String(p).replace(/[^\d+]/g, ''); };
+    var sent = {};
+    var track = function (kind) {
+      if (sent[kind]) return; sent[kind] = 1;
+      var body = JSON.stringify({ kind: kind });
+      try { if (navigator.sendBeacon && navigator.sendBeacon('/api/leadhub/event', new Blob([body], { type: 'text/plain;charset=UTF-8' }))) return; } catch (e) {}
+      fetch('/api/leadhub/event', { method: 'POST', headers: { 'content-type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+    };
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href^="mailto:"]');
+      if (a && a.closest('[data-lh-call],[data-lh-card],[data-lh-foot]')) track(a.getAttribute('href').indexOf('tel:') === 0 ? 'phone_click' : 'email_click');
+    });
+    fetch('/api/leadhub/config', { credentials: 'omit' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (c) {
+      var t = c && c.tenant;
+      if (!t) return;
+      var phone = t.phone && t.phone.trim();
+      if (phone) {
+        document.querySelectorAll('[data-lh-phone]').forEach(function (el) { el.textContent = phone; });
+        document.querySelectorAll('[data-lh-call]').forEach(function (el) { el.setAttribute('href', telHref(phone)); el.hidden = false; });
+        document.documentElement.classList.add('lh-has-call');
+      }
+      var legal = [t.company_name, t.company_code ? 'įm. k. ' + t.company_code : '', t.vat_code ? 'PVM k. ' + t.vat_code : ''].filter(Boolean).join(', ');
+      document.querySelectorAll('[data-lh-legal]').forEach(function (el) { if (legal) el.textContent = 'Paslaugas teikia ' + legal + '.'; });
+      var contacts = (phone ? '<a href="' + telHref(phone) + '">' + esc(phone) + '</a>' : '') +
+        (t.email ? '<a href="mailto:' + esc(t.email) + '">' + esc(t.email) + '</a>' : '') +
+        (t.hours ? '<span class="muted">' + esc(t.hours) + '</span>' : '') +
+        (t.address ? '<span class="muted">' + esc(t.address) + '</span>' : '');
+      document.querySelectorAll('[data-lh-foot]').forEach(function (el) { el.innerHTML = contacts; el.hidden = !contacts; });
+      document.querySelectorAll('[data-lh-card]').forEach(function (el) {
+        el.innerHTML = '<span class="lh-k">Darbus atlieka</span><strong>' + esc(t.company_name || 'Rangovas') + '</strong>' +
+          (t.about ? '<p>' + esc(t.about) + '</p>' : '') +
+          '<div class="lh-row">' + (phone ? '<a class="btn btn-sm" href="' + telHref(phone) + '">Skambinti ' + esc(phone) + '</a>' : '') +
+          (t.hours ? '<span class="muted">' + esc(t.hours) + '</span>' : '') + '</div>';
+        el.hidden = false;
+      });
+      var photos = (c.gallery || []).slice(0, 12);
+      document.querySelectorAll('[data-lh-gallery]').forEach(function (sec) {
+        if (!photos.length) return;
+        var grid = sec.querySelector('[data-lh-gal-grid]');
+        var sub = sec.querySelector('[data-lh-gal-sub]');
+        if (sub) sub.textContent = (t.company_name ? t.company_name + ' – ' : '') + 'atliktų darbų pavyzdžiai.';
+        grid.innerHTML = photos.map(function (p) {
+          return '<figure><img src="' + esc(p.src) + '" srcset="' + esc(p.srcSet) + '" sizes="(max-width: 760px) 100vw, 33vw" alt="' + esc(p.caption || 'Atliktas darbas') + '" loading="lazy" decoding="async">' +
+            (p.caption ? '<figcaption>' + esc(p.caption) + '</figcaption>' : '') + '</figure>';
+        }).join('');
+        sec.hidden = false;
+      });
+    }).catch(function () {});
+  })();
 })();

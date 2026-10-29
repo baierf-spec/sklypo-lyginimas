@@ -73,7 +73,7 @@ p{margin:0}
   .brand{min-width:0}
   .site-head .btn-sm{min-height:44px;padding:0 16px;font-size:15px;white-space:nowrap}
 }
-@media (max-width:380px){.brand-name span{display:none}}
+@media (max-width:420px){.brand-name span{display:none}}
 .badge{font-size:15px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--forest);color:var(--mist)}
 
 /* breadcrumbs */
@@ -356,3 +356,28 @@ svg .sx{transform-box:fill-box;transform-origin:center}
 .form{container-type:inline-size}
 .picks{grid-template-columns:repeat(2,minmax(0,1fr))}
 @container (max-width:320px){.picks{grid-template-columns:1fr}}
+
+/* LeadHub tenant: call buttons, provider card, work photos (hidden until LeadHub says the site is rented) */
+[hidden]{display:none!important}
+.lh-call{gap:8px}
+.lh-card{background:var(--white);border:1px solid var(--line-2);border-radius:var(--r-md);padding:16px 18px;margin-bottom:18px;display:flex;flex-direction:column;gap:4px}
+.dark-form .lh-card{background:rgba(248,250,246,.06);border-color:rgba(199,211,197,.25);color:var(--paper)}
+.lh-card .lh-k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--moss)}
+.dark-form .lh-card .lh-k{color:var(--fern)}
+.lh-card strong{font-size:19px;line-height:1.3}
+.lh-card p{margin:2px 0 0;font-size:15px;line-height:1.55;color:var(--muted)}
+.dark-form .lh-card p,.dark-form .lh-card .muted{color:var(--on-dark)}
+.lh-card .lh-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:10px;font-size:15px}
+.lh-foot{gap:6px!important;font-size:15px;margin-top:4px}
+.lh-gal{padding:var(--sec) 0 0}
+.lh-gal .h2{margin:0 0 6px}
+.lh-gal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.lh-gal figure{margin:0;background:var(--white);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line-2)}
+.lh-gal img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.lh-gal figcaption{padding:10px 14px;font-size:14px;color:var(--muted)}
+.lh-mbar{display:none}
+@media (max-width:760px){
+  .lh-gal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .lh-mbar:not([hidden]){display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:40;align-items:center;justify-content:center;gap:10px;min-height:54px;border-radius:999px;background:var(--moss);color:var(--paper);font-weight:700;font-size:17px;text-decoration:none;box-shadow:0 10px 30px rgba(22,41,28,.28)}
+  .lh-has-call body{padding-bottom:80px}
+}

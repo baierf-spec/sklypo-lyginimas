@@ -19,6 +19,8 @@ const plusIcon = `<svg class="ic" width="20" height="20" viewBox="0 0 20 20" ari
 
 const photoIcon = (dark) => `<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" style="flex:none"><rect width="40" height="40" rx="12" fill="${dark ? '#2E5B3A' : '#E1ECDF'}"/><path d="M11 27l5.5-6.5 4 4 3-3 5.5 5.5" fill="none" stroke="${dark ? '#EEF2EC' : '#2E5B3A'}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="14.5" r="2.2" fill="${dark ? '#EEF2EC' : '#2E5B3A'}"/></svg>`;
 
+const phoneIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>`;
+
 const doneIcon = `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#E1ECDF"/><path d="M14 24.5l6.5 6.5L34 17" fill="none" stroke="#2E5B3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 export const faq = (items, cls = '') => `<div class="faq ${cls}">${items.map((q, i) => `
@@ -60,6 +62,7 @@ export const shortForm = ({ source, dark = false, municipality, villages } = {})
     : `<label class="lbl">Savivaldybė<select class="f" name="savivaldybe" required>${munOptions()}</select></label>`;
   return `
 <div data-lead class="${dark ? 'dark-form' : ''}">
+<div class="lh-card" data-lh-card hidden></div>
 <form class="form" action="/api/lead" method="post" enctype="multipart/form-data" novalidate>
 <input type="hidden" name="saltinis" value="${esc(source)}">
 ${municipality ? `<input type="hidden" name="savivaldybe" value="${esc(municipality)}">` : ''}
@@ -119,6 +122,7 @@ export const header = (current, { minimal = false, partner = false } = {}) => `
 <a href="/" class="brand" aria-label="sklypolyginimas.lt, pradžia">${logoMark()}<span class="brand-name">sklypolyginimas<span>.lt</span></span>${partner ? '<span class="badge">rangovams</span>' : ''}</a>
 ${minimal ? `<a href="/" style="font-size:16px;font-weight:500">Grįžti į pradžią</a>` : partner ? `<a href="#partneris" class="btn btn-sm">Tapti partneriu</a>` : `<nav class="nav" aria-label="Pagrindinė navigacija">
 ${NAV.map((n) => `<a href="${n.href}"${n.href === current ? ' aria-current="page"' : ''}>${n.label}</a>`).join('\n')}
+<a class="btn-o btn-sm lh-call" data-lh-call hidden href="/uzklausa/">${phoneIcon}<span data-lh-phone></span></a>
 <a href="/uzklausa/" class="btn btn-sm">Gauti pasiūlymą</a>
 </nav>`}
 </div></header>`;
@@ -128,11 +132,11 @@ export const footer = () => `
 <div class="foot-grid">
 <div class="stack" style="gap:14px">
 <a href="/" class="brand" aria-label="sklypolyginimas.lt">${logoMark(32)}<span class="brand-name">sklypolyginimas<span>.lt</span></span></a>
-<p class="small" style="font-size:15px;max-width:22em">Sklypų lyginimas, nuolydžiai ir paruošimas vejai visoje Lietuvoje. [Įmonės pavadinimas], įm. k. [kodas].</p>
+<p class="small" style="font-size:15px;max-width:22em">Sklypų lyginimas, nuolydžiai ir paruošimas vejai visoje Lietuvoje. <span data-lh-legal>Užklausas perduodame patikrintiems rangovams.</span></p>
 </div>
 <nav aria-label="Puslapiai"><a href="/paslaugos/">Sklypo lyginimo paslaugos</a><a href="/kaina/">Kainos ir skaičiuoklė</a><a href="/uzklausa/">Užklausa</a><a href="/privatumo-politika/">Privatumo politika</a></nav>
 <nav aria-label="Miestai"><a href="/vilnius/">Sklypo lyginimas Vilniuje</a><a href="/kaunas/">Sklypo lyginimas Kaune</a></nav>
-<div class="stack" style="gap:12px;font-size:16px"><span class="ttl" style="font-weight:600">Užklausos</span><a href="/uzklausa/">Gauti pasiūlymą</a><span class="muted" style="font-size:15px">Matavimas nemokamas</span></div>
+<div class="stack" style="gap:12px;font-size:16px"><span class="ttl" style="font-weight:600">Užklausos</span><a href="/uzklausa/">Gauti pasiūlymą</a><span class="muted" style="font-size:15px">Matavimas nemokamas</span><div class="lh-foot stack" data-lh-foot hidden></div></div>
 </div>
 <p class="small">© 2026 sklypolyginimas.lt</p>
 </div></footer>`;
@@ -195,8 +199,10 @@ ${SITE.turnstileSiteKey ? '<script src="https://challenges.cloudflare.com/turnst
 ${header(current, headOpts)}
 <main id="turinys">
 ${body}
+${noindex || headOpts.minimal || headOpts.partner || path === '/privatumo-politika/' ? '' : `<section class="lh-gal" data-lh-gallery hidden aria-labelledby="lh-gal-h"><div class="wrap"><h2 class="h2" id="lh-gal-h">Atlikti darbai</h2><p class="muted" data-lh-gal-sub></p><div class="lh-gal-grid" data-lh-gal-grid></div></div></section>`}
 </main>
 ${footer()}
+<a class="lh-mbar" data-lh-call hidden href="/uzklausa/">${phoneIcon}<span>Skambinti <span data-lh-phone></span></span></a>
 <script src="/assets/motion.js?v=__V__" defer></script>
 <script src="/assets/app.js?v=__V__" defer></script>
 </body>

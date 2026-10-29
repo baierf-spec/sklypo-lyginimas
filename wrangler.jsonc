@@ -19,6 +19,10 @@
   // Cloudflare Email Service – sends lead notifications to ADMIN_EMAIL
   "send_email": [{ "name": "EMAIL" }],
 
+  // LeadHub decides whose contacts and photos the site shows and where client leads go.
+  // The matching secret is the Worker secret LEADHUB_SECRET.
+  "services": [{ "binding": "LEADHUB", "service": "leadhub" }],
+
   // Lead storage
   "d1_databases": [
     {
@@ -42,7 +46,8 @@
     "LEADS_ENABLED": "true",
     // robots.txt + noindex header (workers.dev is always noindex)
     "SEO_INDEXABLE": "true",
-    "GA_MEASUREMENT_ID": "G-TDK1DCZ6MP"
+    "GA_MEASUREMENT_ID": "G-TDK1DCZ6MP",
+    "LEADHUB_SITE_KEY": "sklypolyginimas"
   },
 
   "observability": { "enabled": true }

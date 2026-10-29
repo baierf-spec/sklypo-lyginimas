@@ -2,6 +2,9 @@
 // Serves the static site (ASSETS) and handles form submissions:
 //   POST /api/lead     → client lead  → e-mail to ADMIN_EMAIL (+ photos) and D1
 //   POST /api/partner  → contractor   → e-mail to ADMIN_EMAIL and D1
+//   LeadHub: while the site is rented, client leads go to the tenant (see worker/leadhub.js)
+
+import { deliverLead, handleLeadhub, leadhubEvent } from './leadhub.js';
 
 const MAX_PHOTOS = 6;
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
@@ -24,6 +27,9 @@ const isTrue = (v) => String(v).toLowerCase() === 'true';
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    const lh = await handleLeadhub(request, env, ctx);
+    if (lh) return lh;
 
     if (url.pathname === '/api/lead' || url.pathname === '/api/partner') {
       if (request.method !== 'POST') return json({ ok: false, error: 'Netinkamas metodas.' }, 405);
@@ -165,33 +171,35 @@ async function handleForm(request, env, ctx, kind) {
   const rows = [...fields, ...META_FIELDS].filter(([k]) => data[k]).map(([k, label]) => [label, data[k], k]);
   const text = [subject, '', ...rows.map(([l, v]) => `${l}: ${v}`), '', attachments.length ? `Nuotraukų: ${attachments.length}` : '', `${when} · ID ${id}`].join('\n');
 
-  const message = {
-    to: env.ADMIN_EMAIL,
-    from: { email: env.EMAIL_FROM, name: 'sklypolyginimas.lt' },
-    subject,
-    html,
-    text,
-  };
-  if (data.email) message.replyTo = data.vardas ? { email: data.email, name: data.vardas } : data.email;
-  if (attachments.length) message.attachments = attachments;
-
   // Delivery with fallbacks so a lead is never lost:
   // 1) EMAIL_FROM  2) EMAIL_FROM_FALLBACK (another onboarded domain)  3) without attachments
-  const senders = [env.EMAIL_FROM, env.EMAIL_FROM_FALLBACK].filter(Boolean);
-  let sent = false, lastErr;
-  for (const from of senders) {
-    message.from = { email: from, name: 'sklypolyginimas.lt' };
-    try { await env.EMAIL.send(message); sent = true; break; } catch (e) { lastErr = e; console.error('email send failed', from, e.code, e.message); }
-  }
-  if (!sent && attachments.length) {
-    delete message.attachments;
-    message.text += '\n\n(Nuotraukų nepavyko prisegti – susisiekite su klientu.)';
+  const sendTo = async (to, prefix) => {
+    const message = { to, from: { email: env.EMAIL_FROM, name: 'sklypolyginimas.lt' }, subject: prefix + subject, html, text };
+    if (data.email) message.replyTo = data.vardas ? { email: data.email, name: data.vardas } : data.email;
+    if (attachments.length) message.attachments = attachments;
+    const senders = [env.EMAIL_FROM, env.EMAIL_FROM_FALLBACK].filter(Boolean);
+    let lastErr;
     for (const from of senders) {
       message.from = { email: from, name: 'sklypolyginimas.lt' };
-      try { await env.EMAIL.send(message); sent = true; break; } catch (e) { lastErr = e; }
+      try { await env.EMAIL.send(message); return; } catch (e) { lastErr = e; console.error('email send failed', from, e.code, e.message); }
     }
+    if (attachments.length) {
+      delete message.attachments;
+      message.text += '\n\n(Nuotraukų nepavyko prisegti – susisiekite su klientu.)';
+      for (const from of senders) {
+        message.from = { email: from, name: 'sklypolyginimas.lt' };
+        try { await env.EMAIL.send(message); return; } catch (e) { lastErr = e; }
+      }
+    }
+    throw lastErr || new Error('email not sent');
+  };
+  // Client leads go to the LeadHub tenant while the site is rented; partner sign-ups always to the owner.
+  if (kind === 'lead') {
+    await deliverLead(env, env.ADMIN_EMAIL, sendTo);
+    ctx.waitUntil(leadhubEvent(env, 'form', { hasPhotos: attachments.length > 0 }));
+  } else {
+    await sendTo(env.ADMIN_EMAIL, '');
   }
-  if (!sent) throw lastErr || new Error('email not sent');
 
   // Count the lead in GA4 from the server (Measurement Protocol): works with ad blockers
   // and without cookies. No personal data is sent to Google.
